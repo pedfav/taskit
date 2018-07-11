@@ -18,4 +18,9 @@ public class DepartmentOperationsImpl implements DepartmentOperations {
     public void save(Departament departament) {
         repository.save(departament);
     }
+
+    @Override
+    public Departament findOne(String guid){
+        return repository.findById(guid).orElseThrow(IllegalArgumentException::new);
+    }
 }

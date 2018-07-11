@@ -8,15 +8,11 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 
@@ -30,6 +26,25 @@ public class DepartmentController {
 
     final MongoTemplate mongoTemplate;
 
+    @ApiOperation("findOne - Search for a department by id")
+    @ApiResponses({
+            @ApiResponse(code=200,message = "Departament found"),
+            @ApiResponse(code=404,message = "Departament not found")
+    })
+    @GetMapping(
+            value = "/{guid}",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Departament> findOne(@PathVariable String guid){
+        mongoTemplate.save(new TrackLog(OperationType.FIND_ONE, guid));
+
+        try{
+            return ResponseEntity.ok().body(operations.findOne(guid));
+        } catch (Exception e){
+            mongoTemplate.save(new TrackLog(OperationType.FIND_ONE, e.getMessage()));
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     @ApiOperation("Create an department")
     @ApiResponses({
             @ApiResponse(code=201,message = "Department created")
@@ -40,8 +55,14 @@ public class DepartmentController {
         departament.setCreation(LocalDateTime.now());
 
         mongoTemplate.save(new TrackLog(OperationType.CREATION, departament));
-        operations.save(departament);
 
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        try {
+            operations.save(departament);
+
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        } catch (Exception e){
+            mongoTemplate.save(new TrackLog(OperationType.ERROR, e.getMessage()));
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }
