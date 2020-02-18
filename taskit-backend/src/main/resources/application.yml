@@ -1,0 +1,21 @@
+jwt:
+  get:
+    token:
+      uri: /authenticate
+  http:
+    request:
+      header: Authorization
+  refresh:
+    token:
+      uri: /refresh
+  signing:
+    key:
+      secret: taskit
+  token:
+    expiration:
+      in:
+        seconds: 604800
+
+cross-origin:
+  front-end: http://localhost:3000
+
