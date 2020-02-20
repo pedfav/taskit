@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Layout, Menu } from 'antd';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import { BrowserRouter as Switch } from 'react-router-dom';
 import AuthenticatedRoute from '../AuthenticatedRoute';
 import OneComponent from './OneComponent';
 import TwoComponent from './TwoComponent';
+import AuthenticationService from '../AuthenticationService';
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -17,11 +18,16 @@ class HomeComponent extends Component {
   }
 
   contentOne = () => {
-    this.props.history.push('/content-one')
+    this.props.history.push('/home/content-one')
   }
 
   contentTwo = () => {
-    this.props.history.push('/content-two')
+    this.props.history.push('/home/content-two')
+  }
+
+  logout = () => {
+    AuthenticationService.logout()
+    this.props.history.push('/login')
   }
 
   render() {
@@ -38,17 +44,16 @@ class HomeComponent extends Component {
                 <Menu.Item key="2">
                   <button className="button-cli btn-block" onClick={this.contentTwo}>Content 2</button>
                 </Menu.Item>
+                <Menu.Item key="2">
+                  <button className="button-cli btn-block" onClick={this.logout}>Logout</button>
+                </Menu.Item>
               </Menu>
             </Sider>
             <Content>
-              <Router>
-                <>
-                  <Switch>
-                    <AuthenticatedRoute path="/content-one" component={OneComponent} />
-                    <AuthenticatedRoute path="/content-two" component={TwoComponent} />
-                  </Switch>
-                </>
-              </Router>
+              <Switch>
+                <AuthenticatedRoute path="/home/content-one" component={OneComponent} />
+                <AuthenticatedRoute path="/home/content-two" component={TwoComponent} />
+              </Switch>
             </Content>
           </Layout>
           <Footer>Footer</Footer>
