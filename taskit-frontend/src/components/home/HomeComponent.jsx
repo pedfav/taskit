@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Layout, Menu } from 'antd';
-import { BrowserRouter as Switch } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 import AuthenticatedRoute from '../AuthenticatedRoute';
 import OneComponent from './OneComponent';
 import TwoComponent from './TwoComponent';
@@ -11,10 +11,7 @@ const { Header, Footer, Sider, Content } = Layout;
 class HomeComponent extends Component {
 
   constructor(props) {
-    super(props)
-    this.state = {
-      content: 'default'
-    }
+    super(props);
   }
 
   contentOne = () => {
@@ -44,7 +41,7 @@ class HomeComponent extends Component {
                 <Menu.Item key="2">
                   <button className="button-cli btn-block" onClick={this.contentTwo}>Content 2</button>
                 </Menu.Item>
-                <Menu.Item key="2">
+                <Menu.Item key="3">
                   <button className="button-cli btn-block" onClick={this.logout}>Logout</button>
                 </Menu.Item>
               </Menu>

@@ -22,12 +22,11 @@ class LoginComponent extends Component {
   }
 
   loginClicked = () => {
-    console.log("entrou")
     AuthenticationService
       .executeAuthenticationService(this.state.username, this.state.password)
       .then(response => {
         AuthenticationService.registerSuccesfulLogin(this.state.username, response.data.token)
-        this.props.history.push('/home')
+        this.props.history.push('/home/content-one')
       }).catch(() => {
         this.setState({ showSuccessMessage: false })
         this.setState({ hasLoginFailed: true })

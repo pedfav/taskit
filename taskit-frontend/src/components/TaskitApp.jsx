@@ -3,22 +3,22 @@ import LoginComponent from './login/LoginComponent';
 import HomeComponent from './home/HomeComponent';
 import LoginRoute from './LoginRoute';
 import AuthenticatedRoute from './AuthenticatedRoute';
+import createHistory from 'history/createBrowserHistory';
+import { Router, Switch, Route } from "react-router-dom";
 
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+const history = createHistory(); 
 
 class TaskitApp extends Component {
   render() {
     return (
       <div className="TaskitApp">
-        <Router>
-          <>
+        <Router history={history}>
             <Switch>
               <LoginRoute path="/" exact component={LoginComponent}/>
               <LoginRoute path="/login" component={LoginComponent}/>
               <AuthenticatedRoute path="/home" component={HomeComponent}/>     
               <Route component = {ErrorComponent}/>
             </Switch>
-          </>
         </Router>
       </div>
     );
