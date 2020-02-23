@@ -1,8 +1,6 @@
 package br.com.pedfav.taskitbackend.entities;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
@@ -17,7 +15,9 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "users", uniqueConstraints = {
         @UniqueConstraint(columnNames = {
                 "username"
@@ -46,8 +46,7 @@ public class User {
     @Size(max = 100)
     private String password;
 
-    @NotBlank
-    private LocalDate birthDay;
+    private LocalDate birthday;
 
     private LocalDateTime creationDate;
 

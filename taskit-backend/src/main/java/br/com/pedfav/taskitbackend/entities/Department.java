@@ -1,8 +1,6 @@
 package br.com.pedfav.taskitbackend.entities;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -10,7 +8,9 @@ import javax.validation.constraints.NotBlank;
 @Getter
 @Setter
 @Entity
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "departments")
 public class Department {
 
