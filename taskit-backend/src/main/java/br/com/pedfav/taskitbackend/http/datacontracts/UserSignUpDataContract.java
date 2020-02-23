@@ -1,4 +1,4 @@
-package br.com.pedfav.taskitbackend.config.jwt.resource;
+package br.com.pedfav.taskitbackend.http.datacontracts;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

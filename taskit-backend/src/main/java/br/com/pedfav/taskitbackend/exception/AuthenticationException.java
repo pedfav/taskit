@@ -1,4 +1,4 @@
-package br.com.pedfav.taskitbackend.config.jwt.resource;
+package br.com.pedfav.taskitbackend.exception;
 
 public class AuthenticationException extends RuntimeException {
     public AuthenticationException(String message, Throwable cause) {

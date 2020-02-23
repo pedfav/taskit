@@ -1,4 +1,4 @@
-package br.com.pedfav.taskitbackend.config.jwt.resource;
+package br.com.pedfav.taskitbackend.http.datacontracts;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,8 +9,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class JwtTokenResponse {
+public class TokenResponseDataContract {
 
-  private String token;
+    private String token;
 
 }

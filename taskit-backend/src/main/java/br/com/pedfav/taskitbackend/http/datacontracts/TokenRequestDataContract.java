@@ -1,4 +1,4 @@
-package br.com.pedfav.taskitbackend.config.jwt.resource;
+package br.com.pedfav.taskitbackend.http.datacontracts;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,7 +11,7 @@ import javax.validation.constraints.NotBlank;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class JwtTokenRequest {
+public class TokenRequestDataContract {
 
     @NotBlank
     private String username;

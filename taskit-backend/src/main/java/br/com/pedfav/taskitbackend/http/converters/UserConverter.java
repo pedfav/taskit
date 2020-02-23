@@ -1,8 +1,9 @@
-package br.com.pedfav.taskitbackend.config.jwt.resource;
+package br.com.pedfav.taskitbackend.http.converters;
 
 
 import br.com.pedfav.taskitbackend.entities.Department;
 import br.com.pedfav.taskitbackend.entities.User;
+import br.com.pedfav.taskitbackend.http.datacontracts.UserSignUpDataContract;
 import org.springframework.stereotype.Component;
 
 @Component

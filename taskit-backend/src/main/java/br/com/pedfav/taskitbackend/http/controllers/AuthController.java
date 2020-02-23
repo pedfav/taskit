@@ -1,7 +1,12 @@
-package br.com.pedfav.taskitbackend.config.jwt.resource;
+package br.com.pedfav.taskitbackend.http.controllers;
 
 import br.com.pedfav.taskitbackend.config.jwt.JwtTokenGenerator;
 import br.com.pedfav.taskitbackend.entities.User;
+import br.com.pedfav.taskitbackend.exception.AuthenticationException;
+import br.com.pedfav.taskitbackend.http.converters.UserConverter;
+import br.com.pedfav.taskitbackend.http.datacontracts.TokenRequestDataContract;
+import br.com.pedfav.taskitbackend.http.datacontracts.TokenResponseDataContract;
+import br.com.pedfav.taskitbackend.http.datacontracts.UserSignUpDataContract;
 import br.com.pedfav.taskitbackend.usecases.UserUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +31,7 @@ public class AuthController {
     private final UserConverter converter;
 
     @PostMapping(value = "/authenticate")
-    public ResponseEntity<?> createAuthenticationToken(@Valid @RequestBody JwtTokenRequest request)
+    public ResponseEntity<?> createAuthenticationToken(@Valid @RequestBody TokenRequestDataContract request)
             throws AuthenticationException {
 
         Authentication authentication = authenticationManager.authenticate(
@@ -38,7 +43,7 @@ public class AuthController {
 
         final String token = jwtTokenGenerator.generateToken(authentication);
 
-        return ResponseEntity.ok(new JwtTokenResponse(token));
+        return ResponseEntity.ok(new TokenResponseDataContract(token));
     }
 
     @PostMapping(value = "/signup")
