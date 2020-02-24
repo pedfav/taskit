@@ -62,6 +62,14 @@ public class JWTWebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(
                         HttpMethod.POST,
                         "/signup"
+                )
+                .antMatchers(
+                        HttpMethod.GET,
+                        "/users/email-availability/**"
+                )
+                .antMatchers(
+                        HttpMethod.GET,
+                        "/users/username-availability/**"
                 );
     }
 }

@@ -35,4 +35,12 @@ public class UserUseCase {
 
         return userRepository.save(user);
     }
+
+    public Boolean checkUsernameAvailability(String username) {
+        return !userRepository.existsByUsername(username);
+    }
+
+    public Boolean checkEmailAvailability(String email) {
+        return !userRepository.existsByEmail(email);
+    }
 }
