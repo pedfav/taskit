@@ -3,12 +3,14 @@ package br.com.pedfav.taskitbackend.http.controllers;
 import br.com.pedfav.taskitbackend.http.datacontracts.UserAvailabilityDataContract;
 import br.com.pedfav.taskitbackend.usecases.UserUseCase;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
+@CrossOrigin(origins = "${cross-origin.front-end}")
 public class UserController {
 
     private final UserUseCase userUseCase;
