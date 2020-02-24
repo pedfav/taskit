@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import AuthenticationService from '../AuthenticationService';
+import { Link } from 'react-router-dom';
 import { Layout } from 'antd';
 import './login.css';
 
@@ -63,6 +64,9 @@ class LoginComponent extends Component {
                   <input type="password" name="password" className="form-control" value={this.state.password} onChange={this.handleChange} />
                 </div>
                 <button className="button-cli btn-block" onClick={this.loginClicked}>Login</button>
+                <p >
+                    Not registered yet? <Link className="signup" to="/signup">Sign up!</Link>
+                </p>
               </div>
             </div>
           </Content>

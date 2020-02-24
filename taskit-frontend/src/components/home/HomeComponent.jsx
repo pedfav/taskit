@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import { Layout, Menu } from 'antd';
 import { Switch } from 'react-router-dom';
 import AuthenticatedRoute from '../AuthenticatedRoute';
 import OneComponent from './OneComponent';
 import TwoComponent from './TwoComponent';
 import AuthenticationService from '../AuthenticationService';
+import { Layout, Menu, Icon } from 'antd';
+import './home.css';
 
-const { Header, Footer, Sider, Content } = Layout;
+const { Header, Content, Footer, Sider } = Layout;
+
 
 class HomeComponent extends Component {
 
@@ -31,12 +33,12 @@ class HomeComponent extends Component {
     return (
       <div className="HomeComponent">
         <Layout>
-          <Header>Header</Header>
+          <Header className="header-home"></Header>
           <Layout>
-            <Sider>
+            <Sider className="sider">
               <Menu>
                 <Menu.Item key="1">
-                  <button className="button-cli btn-block" onClick={this.contentOne}>Content 1</button>
+                  <Icon type="rocket" /><button className="button-cli btn-block" onClick={this.contentOne}>Content 1</button>
                 </Menu.Item>
                 <Menu.Item key="2">
                   <button className="button-cli btn-block" onClick={this.contentTwo}>Content 2</button>
@@ -53,7 +55,7 @@ class HomeComponent extends Component {
               </Switch>
             </Content>
           </Layout>
-          <Footer>Footer</Footer>
+          <Footer className="footer-login"></Footer>
         </Layout>
       </div>
     );
