@@ -4,7 +4,7 @@ export const USERNAME_SESSION_ATTRIBUTE_NAME = 'authenticatedUser'
 
 class AuthenticationService {
   executeAuthenticationService(username, password) {
-    return axios.post('http://localhost:8080/authenticate', {
+    return axios.post('http://localhost:8080/api/authenticate', {
         username,
         password
     })
