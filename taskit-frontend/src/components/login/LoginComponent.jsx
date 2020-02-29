@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import AuthenticationService from '../AuthenticationService';
+import AuthenticationService from '../common/AuthenticationService.js';
 import { Link } from 'react-router-dom';
-import { Layout } from 'antd';
+import { Layout, notification } from 'antd';
 import './login.css';
+import 'antd/es/notification/style/css'
+
 
 const { Header, Footer, Content } = Layout;
 
@@ -29,13 +31,11 @@ class LoginComponent extends Component {
         AuthenticationService.registerSuccesfulLogin(this.state.username, response.data.token)
         this.props.history.push('/home/content-one')
       }).catch(() => {
-        this.setState({ showSuccessMessage: false })
-        this.setState({ hasLoginFailed: true })
+        notification.error({
+          message: 'Taskit',
+          description: 'Sorry! Something went wrong. Please try again!'
+        });
       })
-  }
-
-  dismissAlert = () => {
-    this.setState({ hasLoginFailed: false })
   }
 
   render() {
@@ -46,26 +46,19 @@ class LoginComponent extends Component {
             <div className="text">Taskit</div>
           </Header>
           <Content>
-            {this.state.hasLoginFailed && <div class="alert alert-warning alert-dismissible fade show" role="alert">
-              Invalid Credentials
-                <button type="button" className="close" data-dismiss="alert" aria-label="Close" onClick={this.dismissAlert}>
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>}
             <div className="auth-wrapper">
               <div className="auth-inner">
-                <h3>Sign in</h3>
+                <h1>Sign in</h1>
                 <div className="form-group">
-                  <label>User name</label>
-                  <input type="text" name="username" className="form-control" value={this.state.username} onChange={this.handleChange} />
+                  <input type="text" name="username" placeholder="Username or Email" className="form-control" value={this.state.username} onChange={this.handleChange} />
                 </div>
                 <div className="form-group">
-                  <label>Password</label>
-                  <input type="password" name="password" className="form-control" value={this.state.password} onChange={this.handleChange} />
+                  <input type="password" name="password" placeholder="Password" className="form-control" value={this.state.password} onChange={this.handleChange} />
                 </div>
                 <button className="button-cli btn-block" onClick={this.loginClicked}>Login</button>
+                <br></br>
                 <p >
-                    Not registered yet? <Link className="signup" to="/signup">Sign up!</Link>
+                  Not registered yet? <Link className="signup-link" to="/signup">Sign up!</Link>
                 </p>
               </div>
             </div>

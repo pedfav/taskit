@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import LoginComponent from './login/LoginComponent';
 import HomeComponent from './home/HomeComponent';
-import LoginRoute from './LoginRoute';
-import AuthenticatedRoute from './AuthenticatedRoute';
-import createHistory from 'history/createBrowserHistory';
+import LoginRoute from './common/LoginRoute';
+import AuthenticatedRoute from './common/AuthenticatedRoute';
+import { createBrowserHistory } from 'history'
 import SignUpComponent from './signup/SignUpComponent';
 import { Router, Switch, Route } from "react-router-dom";
 
-const history = createHistory(); 
+const history = createBrowserHistory(); 
 
 class TaskitApp extends Component {
   render() {

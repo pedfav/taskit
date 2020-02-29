@@ -62,14 +62,112 @@ position: fixed;
   transition: all .3s;
 }
 
-.button-cli {
-  background-color: #7422E6;
-  border: none;
-  color: #03DAC5;
-  font-weight:800;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
+.button-logout.ant-btn {
+  line-height: 1.499;
+  position: relative;
   display: inline-block;
+  font-weight: 400;
+  white-space: nowrap;
+  text-align: center;
+  background-image: none;
+  border: 1px solid transparent;
+  -webkit-box-shadow: 0 2px 0 rgba(0, 0, 0, 0.015);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.015);
+  cursor: pointer;
+  -webkit-transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  height: 100%;
+  padding: 0 15px;
   font-size: 16px;
+  border-radius: 0px;
+  color: rgba(0, 0, 0, 0.65);
+  background-color: #7422E6;
+  font-weight:800;
+  color: #03DAC5;
+  float: right;
+}
+
+.icon-lo {
+  font-size: 16px;
+  position: relative;
+  vertical-align: middle;
+}
+
+.ant-menu {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  font-variant: tabular-nums;
+  line-height: 1.5;
+  -webkit-font-feature-settings: 'tnum';
+  font-feature-settings: 'tnum', "tnum";
+  margin-bottom: 0;
+  padding-left: 0;
+  color: #03DAC5;
+  line-height: 0;
+  list-style: none;
+  background-color: #7422E6;
+  outline: none;
+  -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  -webkit-transition: background 0.3s, width 0.2s;
+  transition: background 0.3s, width 0.2s;
+  zoom: 1;
+}
+
+.ant-menu-item.ant-menu-item {
+  background-color: #7422E6;
+  font-weight:800;
+  color: #03DAC5;
+  position: relative;
+  display: block;
+  height: 100%;
+  margin: 0;
+  width: 200px;
+  margin-bottom: 0px;
+  padding: 0 0px;
+  white-space: nowrap;
+  cursor: pointer;
+  -webkit-transition: color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1), border-color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1), background 0.3s cubic-bezier(0.645, 0.045, 0.355, 1), padding 0.15s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition: color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1), border-color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1), background 0.3s cubic-bezier(0.645, 0.045, 0.355, 1), padding 0.15s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.ant-menu-item:hover, .ant-menu-item-active, .ant-menu:not(.ant-menu-inline) .ant-menu-submenu-open, .ant-menu-submenu-active, .ant-menu-submenu-title:hover {
+  background-color: #03DAC5;
+  color: #7422E6;
+  margin-bottom: 0px;
+}
+
+.ant-menu-item-selected.ant-menu-item-selected {
+  color: #03DAC5;
+  background-color: #9150EB;
+  margin-bottom: 0px;
+  width: 200px;
+  
+}
+
+.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+  color: #03DAC5;
+  background-color: #fff;
+  margin-bottom: 0px;
+  width: 200px;
+}
+
+.ant-menu:not(.ant-menu-horizontal).ant-menu:not(.ant-menu-horizontal) {
+  color: #03DAC5;
+  background-color: #9150EB;
+  margin-bottom: 0px;
+  width: 200px;
+}
+
+.ant-menu-item:not(:last-child).ant-menu-item:not(:last-child) {
+  margin-bottom: 0px;
 }

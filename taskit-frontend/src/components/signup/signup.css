@@ -1,19 +1,14 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 
-.header-login {
+.header-signup {
   background-color: #7422E6;
   font-size: xx-large;
   color: white;
   height: 80px;
 }
 
-.signup {
+.login-link {
   color: #7422E6;
-}
-
-.content {
-  align-content: center;
-  vertical-align: middle;
 }
 
 .text {
@@ -26,7 +21,11 @@
   transform: translate(-50%, -50%);
 }
 
-.footer-login {
+.dtpk {
+  width:100%;
+}
+
+.footer-signup {
   bottom: 0;  
   background-color: #03DAC5;
   height: 80px;
@@ -57,14 +56,124 @@
   transition: all .3s;
 }
 
-.button-cli {
-  background-color: rgb(116, 34, 230);
-  border: none;
-  color: #03DAC5;
-  font-weight:800;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
+.button-su.ant-btn {
+  line-height: 1.499;
+  position: relative;
   display: inline-block;
+  font-weight: 400;
+  white-space: nowrap;
+  text-align: center;
+  background-image: none;
+  border: 1px solid transparent;
+  -webkit-box-shadow: 0 2px 0 rgba(0, 0, 0, 0.015);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.015);
+  cursor: pointer;
+  -webkit-transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  height: 54px;
+  padding: 0 15px;
   font-size: 16px;
+  border-radius: 0px;
+  color: rgba(0, 0, 0, 0.65);
+  background-color: #7422E6;
+  font-weight:800;
+  color: #03DAC5;
+}
+
+.ant-btn:focus.ant-btn:focus {
+  opacity: 2;
+  color: #03DAC5;
+  background-color: #7422E6;
+  border-color: #7422E6;
+}
+
+.ant-btn:hover.ant-btn:hover {
+  opacity: 2;
+  color: #03DAC5;
+  background-color: #7422E6;
+  border-color: #7422E6;
+  box-shadow: 0 1px 3px #7422E6;  
+}
+
+.ant-btn[disabled].ant-btn[disabled] {
+  opacity: 0.4;
+  color: #03DAC5;
+  background-color: #7422E6;
+  border-color: #7422E6;
+}
+
+.ant-select-selection--single.ant-select-selection--single {
+  position: relative;
+  height: 40px;
+  cursor: pointer;
+}
+
+.ant-select-selection.ant-select-selection {
+  font-size: 16px;
+  display: block;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  background-color: #fff;
+  border: 1px solid #d9d9d9;
+  border-top-width: 1.02px;
+  border-radius: 4px;
+  outline: none;
+  -webkit-transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.ant-select-selection__placeholder.ant-select-selection__placeholder {
+  position: absolute;
+  top: 50%;
+  right: 9px;
+  left: 0;
+  max-width: 100%;
+  height: 20px;
+  margin-top: -8px;
+  overflow: hidden;
+  color: #bfbfbf;
+  line-height: 20px;
+  white-space: nowrap;
+  text-align: left;
+  text-overflow: ellipsis;
+}
+
+.ant-select-search__field__placeholder.ant-select-search__field__placeholder {
+  position: absolute;
+  top: 50%;
+  right: 9px;
+  left: 0;
+  max-width: 100%;
+  height: 20px;
+  margin-top: -8px;
+  overflow: hidden;
+  color: #bfbfbf;
+  line-height: 20px;
+  white-space: nowrap;
+  text-align: left;
+  text-overflow: ellipsis;
+}
+
+.ant-select-selection-selected-value {
+  top: 50%;
+  margin-top: 3px;
+  float: left;
+  max-width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.ant-input.ant-input {
+  height: 40px;
 }

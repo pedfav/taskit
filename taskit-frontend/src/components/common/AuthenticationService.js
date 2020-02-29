@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { API_BASE_URL } from '../constants';
+import { API_BASE_URL } from '../../constants';
 
 export const USERNAME_SESSION_ATTRIBUTE_NAME = 'authenticatedUser'
 
@@ -9,6 +9,10 @@ class AuthenticationService {
         username,
         password
     })
+  }
+
+  signup(signupPayload) {
+    return axios.post(`${API_BASE_URL}/signup`, signupPayload)
   }
   
   createJWTToken(token) {
@@ -34,6 +38,14 @@ class AuthenticationService {
     let user = sessionStorage.getItem(USERNAME_SESSION_ATTRIBUTE_NAME)
     if(user===null) return '';
     return user;
+  }
+
+  isUsernameAvailable(username) {
+    return axios.get(`${API_BASE_URL}/users/username-availability/` + username)
+  }
+
+  isEmailAvailable(email) {
+    return axios.get(`${API_BASE_URL}/users/email-availability/` + email)
   }
 
   setupAxiosInterceptors(token) {

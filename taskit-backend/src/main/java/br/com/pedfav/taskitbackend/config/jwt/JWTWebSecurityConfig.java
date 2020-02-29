@@ -77,6 +77,10 @@ public class JWTWebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(
                         HttpMethod.GET,
                         "/users/username-availability/**"
+                )
+                .antMatchers(
+                        HttpMethod.GET,
+                        "/departments"
                 );
     }
 }

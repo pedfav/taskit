@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 
 .header-login {
-  background-color: #6200EE;
+  background-color: #7422E6;
   font-size: xx-large;
   color: white;
   height: 80px;
@@ -10,6 +10,10 @@
 .content {
   align-content: center;
   vertical-align: middle;
+}
+
+.signup-link {
+  color: #7422E6;
 }
 
 .text {
@@ -54,7 +58,7 @@
 }
 
 .button-cli {
-  background-color: #6200EE;
+  background-color: #7422E6;
   border: none;
   color: #03DAC5;
   font-weight:800;
