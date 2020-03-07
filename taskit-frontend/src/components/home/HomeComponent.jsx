@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Switch } from 'react-router-dom';
 import AuthenticatedRoute from '../common/AuthenticatedRoute';
-import OneComponent from './OneComponent';
-import TwoComponent from './TwoComponent';
+import CreateTaskComponent from '../tasks/CreateTaskComponent';
+import TaskGridComponent from '../tasks/TaskGridComponent'
 import AuthenticationService from '../common/AuthenticationService';
 import { Layout, Menu, Icon, Button } from 'antd';
 import 'antd/es/menu/style/css'
@@ -12,12 +12,16 @@ const { Header, Content, Footer, Sider } = Layout;
 
 class HomeComponent extends Component {
 
-  contentOne = () => {
-    this.props.history.push('/home/content-one')
+  renderNewTask = () => {
+    this.props.history.push('/home/new-task')
   }
 
-  contentTwo = () => {
-    this.props.history.push('/home/content-two')
+  renderYourTaskGrid = () => {
+    this.props.history.push('/home/your-tasks')
+  }
+
+  renderDepartmentTaskGrid = () => {
+    this.props.history.push('/home/department-tasks')
   }
 
   logout = () => {
@@ -35,40 +39,36 @@ class HomeComponent extends Component {
           <Layout>
             <Sider className="sider">
               <Menu>
-                <Menu.Item 
-                key="1"
-                onClick={this.contentOne}>
-                  <span>Option 1</span>
+                <Menu.Item
+                  key="1"
+                  onClick={this.renderNewTask}>
+                  <span>New task!</span>
                 </Menu.Item>
-                <Menu.Item 
-                key="2"
-                onClick={this.contentTwo}>
-                  <span>Option 2</span>
+                <Menu.Item
+                  key="2"
+                  onClick={this.renderDepartmentTaskGrid}>
+                  <span>Department tasks</span>
                 </Menu.Item>
-                <Menu.Item 
-                key="3"
-                onClick={this.contentTwo}>
-                  <span>Option 3</span>
-                </Menu.Item>
-                <Menu.Item 
-                key="4"
-                onClick={this.contentTwo}>
-                  <span>Option 4</span>
+                <Menu.Item
+                  key="3"
+                  onClick={this.renderYourTaskGrid}>
+                  <span>Your Tasks</span>
                 </Menu.Item>
               </Menu>
             </Sider>
             <Content>
               <Switch>
-                <AuthenticatedRoute path="/home/content-one" component={OneComponent} />
-                <AuthenticatedRoute path="/home/content-two" component={TwoComponent} />
+                <AuthenticatedRoute path="/home/new-task" component={CreateTaskComponent} />
+                <AuthenticatedRoute path="/home/department-tasks" component={() => <TaskGridComponent name="Department tasks" />} />
+                <AuthenticatedRoute path="/home/your-tasks" component={() => <TaskGridComponent name="Your tasks" />} />
               </Switch>
             </Content>
-          </Layout>
-          <Footer className="footer-login"></Footer>
         </Layout>
-      </div>
-    );
-  }
-}
-
-export default HomeComponent;
+            <Footer className="footer-login"></Footer>
+          </Layout>
+      </div >
+        );
+      }
+    }
+    
+    export default HomeComponent;

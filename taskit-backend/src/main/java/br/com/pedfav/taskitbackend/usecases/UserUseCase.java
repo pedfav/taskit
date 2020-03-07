@@ -4,6 +4,7 @@ package br.com.pedfav.taskitbackend.usecases;
 import br.com.pedfav.taskitbackend.entities.Role;
 import br.com.pedfav.taskitbackend.entities.User;
 import br.com.pedfav.taskitbackend.enums.RoleName;
+import br.com.pedfav.taskitbackend.exception.ResourceNotFoundException;
 import br.com.pedfav.taskitbackend.exception.RoleNotFoundExecption;
 import br.com.pedfav.taskitbackend.exception.UserAlreadyExistsException;
 import br.com.pedfav.taskitbackend.gateways.repositories.RoleRepository;
@@ -42,5 +43,15 @@ public class UserUseCase {
 
     public Boolean checkEmailAvailability(String email) {
         return !userRepository.existsByEmail(email);
+    }
+
+    public User getUserByEmailOrUserName(String emailOrUsername) {
+        return userRepository.findByUsernameOrEmail(emailOrUsername, emailOrUsername)
+                .orElseThrow(() -> new ResourceNotFoundException("User", "Username or email", emailOrUsername));
+    }
+
+    public User getUserByUsername(String username) {
+        return userRepository.findByUsername(username)
+                .orElseThrow(() -> new ResourceNotFoundException("User", "Username", username));
     }
 }

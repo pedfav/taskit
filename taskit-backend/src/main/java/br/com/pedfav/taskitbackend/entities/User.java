@@ -1,12 +1,8 @@
 package br.com.pedfav.taskitbackend.entities;
 
 import lombok.*;
-import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -30,24 +26,11 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @NotBlank
     private String name;
-
-    @NotBlank
     private String username;
-
-    @Email
-    @NotBlank
-    @NaturalId
     private String email;
-
-    @NotBlank
-    @Size(max = 100)
     private String password;
-
     private LocalDate birthday;
-
     private LocalDateTime creationDate;
 
     @ManyToOne
@@ -59,11 +42,4 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
-
-    public User(String name, String username, String email, String password) {
-        this.name = name;
-        this.username = username;
-        this.email = email;
-        this.password = password;
-    }
 }

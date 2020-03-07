@@ -1,5 +1,6 @@
 package br.com.pedfav.taskitbackend.http.controllers;
 
+import br.com.pedfav.taskitbackend.entities.User;
 import br.com.pedfav.taskitbackend.http.datacontracts.UserAvailabilityDataContract;
 import br.com.pedfav.taskitbackend.usecases.UserUseCase;
 import lombok.RequiredArgsConstructor;
@@ -25,5 +26,10 @@ public class UserController {
     public UserAvailabilityDataContract checkEmailAvailability(@PathVariable("email") String email) {
         Boolean isAvailable = userUseCase.checkEmailAvailability(email);
         return new UserAvailabilityDataContract(isAvailable);
+    }
+
+    @GetMapping("/users/username-or-email/{usernameOrEmail}")
+    public User findByUsernameOrEmail(@PathVariable("usernameOrEmail") String usernameOrEmail) {
+        return userUseCase.getUserByEmailOrUserName(usernameOrEmail);
     }
 }

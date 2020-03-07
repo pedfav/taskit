@@ -61,18 +61,20 @@ class SignUpComponent extends Component {
     };
 
     AuthenticationService.signup(signupRequest)
-    .then(response => {
-      notification.success({
+      .then(response => {
+        notification.success({
           message: 'Taskit',
           description: "You're successfully registered. Please Login to continue!",
-      });          
-      this.props.history.push('/login')
-    }).catch(error => {
-      notification.error({
-        message: 'Taskit',
-        description: 'Sorry! Something went wrong. Please try again!'
-    });
-  });
+          duration: 2
+        });
+        this.props.history.push('/login')
+      }).catch(error => {
+        notification.error({
+          message: 'Taskit',
+          description: 'Sorry! Something went wrong. Please try again!',
+          duration: 2
+        });
+      });
   }
 
   handleChange = (event, validationFun) => {
@@ -295,101 +297,97 @@ class SignUpComponent extends Component {
         <Content>
           <div className="auth-wrapper">
             <div className="auth-inner">
-              <div className="signup-container">
-                <h1 className="page-title">Sign Up</h1>
-                <div className="signup-content">
-                  <Form onSubmit={this.handleSubmit} className="signup-form">
-                    <FormItem
-                      className="form-group"
-                      validateStatus={this.state.name.validateStatus}
-                      help={this.state.name.errorMsg}>
-                      <Input
-                        size="large"
-                        name="name"
-                        autoComplete="off"
-                        placeholder="Full name"
-                        value={this.state.name.value}
-                        onChange={(event) => this.handleChange(event, this.validateName)} />
-                    </FormItem>
-                    <FormItem
-                      hasFeedback
-                      className="form-group"
-                      validateStatus={this.state.username.validateStatus}
-                      help={this.state.username.errorMsg}>
-                      <Input
-                        size="large"
-                        name="username"
-                        autoComplete="off"
-                        placeholder="Username"
-                        value={this.state.username.value}
-                        onChange={(event) => this.handleChange(event, this.validateUsername)}
-                        onBlur={this.isUsernameAvailable} />
-                    </FormItem>
-                    <FormItem
-                      hasFeedback
-                      className="form-group"
-                      validateStatus={this.state.email.validateStatus}
-                      help={this.state.email.errorMsg}>
-                      <Input
-                        size="large"
-                        name="email"
-                        autoComplete="off"
-                        placeholder="Email"
-                        value={this.state.email.value}
-                        onChange={(event) => this.handleChange(event, this.validateEmail)}
-                        onBlur={this.isEmailAvailable} />
-                    </FormItem>
-                    <FormItem
-                      className="form-group"
-                      validateStatus={this.state.password.validateStatus}
-                      help={this.state.password.errorMsg}>
-                      <Input
-                        size="large"
-                        name="password"
-                        type="password"
-                        autoComplete="off"
-                        placeholder="Password"
-                        value={this.state.password.value}
-                        onChange={(event) => this.handleChange(event, this.validatePassword)} />
-                    </FormItem>
-                    <FormItem
-                      className="form-group"
-                      validateStatus={this.state.department.validateStatus}
-                      help={this.state.department.errorMsg}>
-                      <Select
-                        showSearch
-                        placeholder="Department"
-                        name="department"
-                        onChange={(event) => this.handleChangeCombo(event)}>
-                        {this.state.departments.map((department) => (
-                          <Option name={department.id} value={department.id}>{department.name}</Option>
-                        ))}
-                      </Select>
-                    </FormItem>
-                    <FormItem
-                      className="form-group"
-                      validateStatus={this.state.birthday.validateStatus}
-                      help={this.state.birthday.errorMsg}>
-                      <DatePicker
-                        className="dtpk"
-                        name="birthday"
-                        placeholder="Birthday"
-                        onChange={this.handleChangeDate} />
-                    </FormItem>
-                    <FormItem>
-                      <Button
-                        htmlType="submit"
-                        className="button-su btn-block"
-                        size="large"
-                        disabled={this.isFormValid()}>
-                        Sign up</Button>
-                    </FormItem>
-                  </Form>
-                  <p >
-                    Already registed? <Link className="login-link" to="/login">Sign in!</Link>
-                  </p>
-                </div>
-              </div>
+              <h1 className="page-title">Sign Up</h1>
+              <Form onSubmit={this.handleSubmit} className="signup-form">
+                <FormItem
+                  className="form-group"
+                  validateStatus={this.state.name.validateStatus}
+                  help={this.state.name.errorMsg}>
+                  <Input
+                    size="large"
+                    name="name"
+                    autoComplete="off"
+                    placeholder="Full name"
+                    value={this.state.name.value}
+                    onChange={(event) => this.handleChange(event, this.validateName)} />
+                </FormItem>
+                <FormItem
+                  hasFeedback
+                  className="form-group"
+                  validateStatus={this.state.username.validateStatus}
+                  help={this.state.username.errorMsg}>
+                  <Input
+                    size="large"
+                    name="username"
+                    autoComplete="off"
+                    placeholder="Username"
+                    value={this.state.username.value}
+                    onChange={(event) => this.handleChange(event, this.validateUsername)}
+                    onBlur={this.isUsernameAvailable} />
+                </FormItem>
+                <FormItem
+                  hasFeedback
+                  className="form-group"
+                  validateStatus={this.state.email.validateStatus}
+                  help={this.state.email.errorMsg}>
+                  <Input
+                    size="large"
+                    name="email"
+                    autoComplete="off"
+                    placeholder="Email"
+                    value={this.state.email.value}
+                    onChange={(event) => this.handleChange(event, this.validateEmail)}
+                    onBlur={this.isEmailAvailable} />
+                </FormItem>
+                <FormItem
+                  className="form-group"
+                  validateStatus={this.state.password.validateStatus}
+                  help={this.state.password.errorMsg}>
+                  <Input
+                    size="large"
+                    name="password"
+                    type="password"
+                    autoComplete="off"
+                    placeholder="Password"
+                    value={this.state.password.value}
+                    onChange={(event) => this.handleChange(event, this.validatePassword)} />
+                </FormItem>
+                <FormItem
+                  className="form-group"
+                  validateStatus={this.state.department.validateStatus}
+                  help={this.state.department.errorMsg}>
+                  <Select
+                    showSearch
+                    placeholder="Department"
+                    name="department"
+                    onChange={(event) => this.handleChangeCombo(event)}>
+                    {this.state.departments.map((department) => (
+                      <Option key={department.id} name={department.id} value={department.id}>{department.name}</Option>
+                    ))}
+                  </Select>
+                </FormItem>
+                <FormItem
+                  className="form-group"
+                  validateStatus={this.state.birthday.validateStatus}
+                  help={this.state.birthday.errorMsg}>
+                  <DatePicker
+                    className="dtpk"
+                    name="birthday"
+                    placeholder="Birthday"
+                    onChange={this.handleChangeDate} />
+                </FormItem>
+                <FormItem>
+                  <Button
+                    htmlType="submit"
+                    className="button-su btn-block"
+                    size="large"
+                    disabled={this.isFormValid()}>
+                    Sign up</Button>
+                </FormItem>
+              </Form>
+              <p >
+                Already registed? <Link className="login-link" to="/login">Sign in!</Link>
+              </p>
             </div>
           </div>
         </Content>
