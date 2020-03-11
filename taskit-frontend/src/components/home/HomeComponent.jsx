@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Switch } from 'react-router-dom';
 import AuthenticatedRoute from '../common/AuthenticatedRoute';
 import CreateTaskComponent from '../tasks/CreateTaskComponent';
-import TaskGridComponent from '../tasks/TaskGridComponent'
+import TasksByDepartmentComponent from '../tasks/TasksByDepartmentComponent'
+import TasksAssignedComponent from '../tasks/TasksAssignedComponent'
 import AuthenticationService from '../common/AuthenticationService';
 import { Layout, Menu, Icon, Button } from 'antd';
 import 'antd/es/menu/style/css'
@@ -59,8 +60,8 @@ class HomeComponent extends Component {
             <Content>
               <Switch>
                 <AuthenticatedRoute path="/home/new-task" component={CreateTaskComponent} />
-                <AuthenticatedRoute path="/home/department-tasks" component={() => <TaskGridComponent name="Department tasks" />} />
-                <AuthenticatedRoute path="/home/your-tasks" component={() => <TaskGridComponent name="Your tasks" />} />
+                <AuthenticatedRoute path="/home/department-tasks" component={TasksByDepartmentComponent}/>
+                <AuthenticatedRoute path="/home/your-tasks" component={TasksAssignedComponent}/>
               </Switch>
             </Content>
         </Layout>

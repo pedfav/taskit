@@ -35,7 +35,7 @@ public class User {
 
     @ManyToOne
     @JoinColumn(name = "idDepartment")
-    private Department idDepartment;
+    private Department department;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",

@@ -101,7 +101,6 @@ class CreateTaskComponent extends Component {
   }
 
   handleChange = (event, validationFun) => {
-    console.log(this.state.title.value)
     this.setState({
       [event.target.name]: {
         value: event.target.value,

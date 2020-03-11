@@ -297,7 +297,7 @@ class SignUpComponent extends Component {
         <Content>
           <div className="auth-wrapper">
             <div className="auth-inner">
-              <h1 className="page-title">Sign Up</h1>
+              <h1 style={{color: '#696969' }}>Sign Up</h1>
               <Form onSubmit={this.handleSubmit} className="signup-form">
                 <FormItem
                   className="form-group"

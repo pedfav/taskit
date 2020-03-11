@@ -21,7 +21,7 @@ public class UserConverter {
                 .email(dataContract.getEmail())
                 .password(passwordEncoder.encode(dataContract.getPassword()))
                 .birthday(dataContract.getBirthday())
-                .idDepartment(Department.builder()
+                .department(Department.builder()
                         .id(dataContract.getIdDepartment())
                         .build())
                 .build();

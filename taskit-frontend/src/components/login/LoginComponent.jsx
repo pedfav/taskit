@@ -31,7 +31,7 @@ class LoginComponent extends Component {
       .then(() => AuthenticationService.getUserByUsernameOrEmail(this.state.username))
       .then(username => {
         AuthenticationService.registerSuccesfulLogin(username)
-        this.props.history.push('/home/new-task')
+        this.props.history.push('/home/department-tasks')
       }).catch(() => {
         notification.error({
           message: 'Taskit',
@@ -50,7 +50,7 @@ class LoginComponent extends Component {
           <Content>
             <div className="auth-wrapper">
               <div className="auth-inner">
-                <h1>Sign in</h1>
+                <h1 style={{color: '#696969' }}>Sign in</h1>
                 <div className="form-group">
                   <input type="text" name="username" placeholder="Username or Email" className="form-control" value={this.state.username} onChange={this.handleChange} />
                 </div>

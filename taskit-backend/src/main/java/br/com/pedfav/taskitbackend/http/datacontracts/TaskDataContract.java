@@ -1,6 +1,8 @@
 package br.com.pedfav.taskitbackend.http.datacontracts;
 
 import br.com.pedfav.taskitbackend.enums.Urgency;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.Builder;
 import lombok.Data;
 
 import javax.validation.constraints.Future;
@@ -10,7 +12,11 @@ import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
 @Data
+@Builder
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class TaskDataContract {
+
+    private Long id;
 
     @NotBlank
     @Size(max = 50)

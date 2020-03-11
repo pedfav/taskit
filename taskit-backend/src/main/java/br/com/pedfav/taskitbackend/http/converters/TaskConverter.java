@@ -23,4 +23,15 @@ public class TaskConverter {
                 .urgencyLevel(dataContract.getUrgency())
                 .build();
     }
+
+    public TaskDataContract convertTask(Task task) {
+        return TaskDataContract.builder()
+                .id(task.getId())
+                .title(task.getTitle())
+                .description(task.getDescription())
+                .requesterUsername(task.getRequester().getUsername())
+                .targetDate(task.getTargetDate())
+                .urgency(task.getUrgencyLevel())
+                .build();
+    }
 }
