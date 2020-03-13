@@ -80,7 +80,7 @@ public class JWTWebSecurityConfig extends WebSecurityConfigurerAdapter {
                 )
                 .antMatchers(
                         HttpMethod.GET,
-                        "/departments"
+                        "/active-departments"
                 );
     }
 }

@@ -64,4 +64,12 @@ public class TaskController {
 
         return ResponseEntity.ok().build();
     }
+
+    @PatchMapping(value = "/task/finish-task/{task-id}")
+    public ResponseEntity finishTask(@PathVariable("task-id") Long taskId) {
+
+        taskUseCase.finishTask(taskId);
+
+        return ResponseEntity.ok().build();
+    }
 }

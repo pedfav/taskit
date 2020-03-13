@@ -42,3 +42,18 @@
   justify-content: space-between;
   float: left;
 }
+
+.ant-btn.ant-btn {
+  background-color: #7422E6;
+  border: none;
+  color: #03DAC5;
+  font-weight:800;
+  height: 27px;
+}
+
+.ant-btn[disabled].ant-btn[disabled] {
+  opacity: 0.4;
+  color: #03DAC5;
+  background-color: #7422E6;
+  border-color: #7422E6;
+}

@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -22,4 +23,6 @@ public class Department {
     private String name;
 
     private String description;
+    private Boolean active;
+    private LocalDateTime creationTime;
 }

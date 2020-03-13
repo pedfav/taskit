@@ -36,4 +36,5 @@ public class Task {
     @JoinColumn(name = "idResponsible")
     private User responsible;
     private Urgency urgencyLevel;
+    private boolean done;
 }

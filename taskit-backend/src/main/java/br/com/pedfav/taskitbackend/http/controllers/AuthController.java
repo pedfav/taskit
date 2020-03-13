@@ -1,6 +1,8 @@
 package br.com.pedfav.taskitbackend.http.controllers;
 
 import br.com.pedfav.taskitbackend.config.jwt.JwtTokenGenerator;
+import br.com.pedfav.taskitbackend.config.jwt.JwtUserDetails;
+import br.com.pedfav.taskitbackend.config.jwt.JwtUserDetailsService;
 import br.com.pedfav.taskitbackend.entities.User;
 import br.com.pedfav.taskitbackend.exception.AuthenticationException;
 import br.com.pedfav.taskitbackend.http.converters.UserConverter;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.net.URI;
 
@@ -29,6 +32,7 @@ public class AuthController {
 
     private final JwtTokenGenerator jwtTokenGenerator;
     private final AuthenticationManager authenticationManager;
+    private final JwtUserDetailsService jwtUserDetailsService;
     private final UserUseCase userUseCase;
     private final UserConverter converter;
 
@@ -46,6 +50,21 @@ public class AuthController {
         final String token = jwtTokenGenerator.generateToken(authentication);
 
         return ResponseEntity.ok(new TokenResponseDataContract(token));
+    }
+
+    @PostMapping(value = "/refresh-token")
+    public ResponseEntity<?> refreshAndGetAuthenticationToken(HttpServletRequest request) {
+        String authToken = request.getHeader("Authorization");
+        final String token = authToken.substring(7);
+        String userId = jwtTokenGenerator.getUsernameFromToken(token);
+        JwtUserDetails user = (JwtUserDetails) jwtUserDetailsService.loadUserById(Long.parseLong(userId));
+
+        if (jwtTokenGenerator.canTokenBeRefreshed(token)) {
+            String refreshedToken = jwtTokenGenerator.refreshToken(token);
+            return ResponseEntity.ok(new TokenResponseDataContract(refreshedToken));
+        } else {
+            return ResponseEntity.badRequest().body(null);
+        }
     }
 
     @PostMapping(value = "/signup")

@@ -1,13 +1,17 @@
 spring:
   datasource:
     driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/taskit
+    url: jdbc:mysql://localhost:3306/taskit?serverTimezone=UTC&useLegacyDatetimeCode=false
     username: taskit
     password: taskit123
   jpa:
     hibernate.ddl-auto: update
     generate-ddl: true
     show-sql: true
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
 
 server:
   servlet:

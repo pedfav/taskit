@@ -42,7 +42,7 @@ class SignUpComponent extends Component {
   }
 
   componentDidMount() {
-    DepartmentService.getAllDepartments()
+    DepartmentService.getActiveDepartments()
       .then(response => {
         this.setState({ departments: response.data });
       })

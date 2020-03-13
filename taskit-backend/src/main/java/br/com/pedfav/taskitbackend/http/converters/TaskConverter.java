@@ -32,6 +32,7 @@ public class TaskConverter {
                 .requesterUsername(task.getRequester().getUsername())
                 .targetDate(task.getTargetDate())
                 .urgency(task.getUrgencyLevel())
+                .done(task.isDone())
                 .build();
     }
 }

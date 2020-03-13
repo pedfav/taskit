@@ -10,12 +10,16 @@ class TaskService {
     return axios.get(`${API_BASE_URL}/task/users-department/${username}`)
   }
   
-  getTasksByUserResposnible(username) {
+  getTasksByUserResponsible(username) {
     return axios.get(`${API_BASE_URL}/task/user-responsible/${username}`)
   }
 
   assignTask(username, taskId) {
     return axios.patch(`${API_BASE_URL}/task/assign-task/${taskId}/user/${username}`)
+  }
+  
+  finishTask(taskId) {
+    return axios.patch(`${API_BASE_URL}/task/finish-task/${taskId}`)
   }
 }
 

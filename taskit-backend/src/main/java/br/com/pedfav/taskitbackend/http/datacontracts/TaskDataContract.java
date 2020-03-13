@@ -36,4 +36,6 @@ public class TaskDataContract {
 
     @NotNull
     private Urgency urgency;
+
+    private boolean done;
 }

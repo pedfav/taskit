@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import TaskService from './TaskService.js'
 import AuthenticationService from '../common/AuthenticationService.js';
+import moment from 'moment';
+import { Table, Button, notification, Tag } from 'antd';
 
-import { Table, Icon, notification } from 'antd';
 import 'antd/es/table/style/css';
 import 'antd/es/modal/style/css';
 import './tasks.css';
-
 
 class TasksAssignedComponent extends Component {
 
@@ -19,33 +19,51 @@ class TasksAssignedComponent extends Component {
   }
 
   componentDidMount() {
-    TaskService.getTasksByUserResposnible(AuthenticationService.getUserLoggedIn())
+    TaskService.getTasksByUserResponsible(AuthenticationService.getUserLoggedIn())
+
       .then(response => {
-        this.setState({ tasks: response.data })
+        this.setState({ tasks: response.data.sort(function (a, b) { return a.done - b.done }) })
       })
   }
 
-  assignTask = (record) => {
-    TaskService.assignTask(AuthenticationService.getUserLoggedIn(), record.id)
-      .then(() => {
-
-        this.setState({
-          tasks: this.state.tasks.filter(task => task.id !== record.id)
-        })
+  finishTask = (record) => {
+    TaskService.finishTask(record.id)
+      .then((response) => {
+        TaskService.getTasksByUserResponsible(AuthenticationService.getUserLoggedIn())
+          .then(response => {
+            this.setState({ tasks: response.data.sort(function (a, b) { return a.done - b.done }) })
+          })
 
         notification.success({
           message: 'Taskit',
-          description: `Task #${record.id} assigned to you!`,
+          description: `Task #${record.id} finished!`,
           duration: 2
         });
       })
       .catch(() => {
         notification.error({
           message: 'Taskit',
-          description: `Task #${record.id} could not be assigned to you, please try again!`,
+          description: `Task #${record.id} could not be finished to you, please try again!`,
           duration: 2
         });
       })
+  }
+
+  calculateDates = (text, record) => {
+
+    if (moment().isBefore(moment(text))) {
+      if ((moment().diff(text, 'days') * - 1) <= 1 ) {
+        return !record.done && <div style={{ color: "green" }}>{moment().diff(text, 'days') * - 1 + ' day left'}</div>
+      } else {
+        return !record.done && <div style={{ color: "green" }}>{moment().diff(text, 'days') * - 1 + ' days left'}</div>
+      }
+    } else {
+      if ((moment().diff(text, 'days') * - 1) <= 1 ) {
+        return !record.done && <div style={{ color: "red" }}>{moment().diff(text, 'days') + ' days late'}</div>
+      } else {
+        return !record.done && <div style={{ color: "red" }}>{moment().diff(text, 'days') + ' day late'}</div>
+      }
+    }
   }
 
   render() {
@@ -77,14 +95,28 @@ class TasksAssignedComponent extends Component {
         key: 'urgency'
       },
       {
-        title: 'Assign',
-        key: 'Assign',
+        title: 'Done',
+        dataIndex: 'done',
+        key: 'done',
+        render: (record) => (
+          record ? <Tag color='green'>Done</Tag> : <Tag color='red'>Not done</Tag>
+        ),
+      },
+      {
+        title: 'Time left',
+        dataIndex: 'targetDate',
+        key: 'timeLeft',
+        render: (text, record) => this.calculateDates(text, record)
+      },
+      {
+        title: 'Finish',
+        key: 'finish',
         align: 'center',
         render: (record) => (
-          <Icon
-            style={{ marginLeft: 'auto', marginRight: 'auto' }}
-            type="import"
-            onClick={() => this.assignTask(record)} />
+          <Button
+            className="button-cli"
+            onClick={() => this.finishTask(record)}
+            disabled={record.done}>Finish</Button>
         ),
       }];
 
@@ -100,7 +132,7 @@ class TasksAssignedComponent extends Component {
         <Table
           scroll={{ y: 460 }}
           expandedRowRender={record => <p>{record.description}</p>}
-          size="middle"
+          size="small"
           pagination={{ pageSize: 10, position: 'bottom', size: 'small' }}
           className="table-tasks"
           columns={columns}

@@ -24,6 +24,7 @@ public class TaskUseCase {
             task.setCreationDate(LocalDateTime.now());
             User requester = userUseCase.getUserByUsername(task.getRequester().getUsername());
             task.setRequester(requester);
+            task.setDone(false);
             return taskRepository.save(task);
         } catch (RuntimeException e) {
             throw new CouldNotInsertTaskException("Could not insert task!");
@@ -63,6 +64,19 @@ public class TaskUseCase {
             User user = userUseCase.getUserByUsername(username);
 
             task.setResponsible(user);
+
+            return taskRepository.save(task);
+        } catch (RuntimeException e) {
+            throw new CouldNotInsertTaskException("Could not update task!");
+        }
+    }
+
+    public Task finishTask(Long taskId) {
+        try {
+            Task task = taskRepository.findById(taskId)
+                    .orElseThrow(() -> new ResourceNotFoundException("Task", "Task id", taskId));
+
+            task.setDone(true);
 
             return taskRepository.save(task);
         } catch (RuntimeException e) {

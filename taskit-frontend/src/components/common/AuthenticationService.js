@@ -25,7 +25,7 @@ class AuthenticationService {
 
   setToken(token) {
     localStorage.setItem('token', this.createJWTToken(token));
-    this.setupAxiosInterceptors(this.createJWTToken(token))
+    // this.setupAxiosInterceptors(this.createJWTToken(token))
   }
 
   getUserByUsernameOrEmail(usernameOrEmail) {
@@ -59,16 +59,16 @@ class AuthenticationService {
     return axios.get(`${API_BASE_URL}/users/email-availability/` + email)
   }
 
-  setupAxiosInterceptors(token) {
-    axios.interceptors.request.use(
-      (config) => {
-        if (token != null) {
-          config.headers.authorization = token
-        }
-        return config
-      }
-    )
-  }
+  // setupAxiosInterceptors(token) {
+  //   axios.interceptors.request.use(
+  //     (config) => {
+  //       if (token != null) {
+  //         config.headers.authorization = token
+  //       }
+  //       return config
+  //     }
+  //   )
+  // }
 }
 
 axios.interceptors.request.use(

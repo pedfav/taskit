@@ -99,6 +99,7 @@
 }
 
 .ant-menu {
+  font-weight: 400;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   margin: 0;
@@ -120,6 +121,23 @@
   -webkit-transition: background 0.3s, width 0.2s;
   transition: background 0.3s, width 0.2s;
   zoom: 1;
+}
+
+.ant-menu-item-group-title.ant-menu-item-group-title {
+  font-size: 16px;
+  font-weight: 900;
+  align-content: left;
+  color: #FFF;
+  line-height: 40px;
+  background-color: #5213a8;
+  width: 200px;
+  text-align: left;
+  /* opacity : 0.8; */
+}
+
+.icon-menu {
+  position: relative;
+  vertical-align: middle;
 }
 
 .ant-menu-item.ant-menu-item {
