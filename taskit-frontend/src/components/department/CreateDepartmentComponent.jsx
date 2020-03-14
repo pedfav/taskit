@@ -89,7 +89,7 @@ class CreateDepartmentComponent extends Component {
   }
 
   validateDescription = (description) => {
-    if (description.length < 400) {
+    if (description.length < 100) {
       return {
         validateStatus: 'success',
         errorMsg: null,
@@ -97,7 +97,7 @@ class CreateDepartmentComponent extends Component {
     } else {
       return {
         validateStatus: 'error',
-        errorMsg: `Description to long, max 400 characters`
+        errorMsg: `Description to long, max 100 characters`
       }
     }
   }

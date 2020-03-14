@@ -87,7 +87,7 @@
   border-radius: 0px;
   color: rgba(0, 0, 0, 0.65);
   background-color: #7422E6;
-  font-weight:800;
+  font-weight:600;
   color: #03DAC5;
   float: right;
 }
@@ -125,9 +125,9 @@
 
 .ant-menu-item-group-title.ant-menu-item-group-title {
   font-size: 16px;
-  font-weight: 900;
+  font-weight: 600;
   align-content: left;
-  color: #FFF;
+  color: #2dfce8;
   line-height: 40px;
   background-color: #5213a8;
   width: 200px;
@@ -142,7 +142,7 @@
 
 .ant-menu-item.ant-menu-item {
   background-color: #7422E6;
-  font-weight:800;
+  font-weight:600;
   color: #03DAC5;
   position: relative;
   display: block;

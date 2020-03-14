@@ -36,6 +36,20 @@ public class DepartmentController {
         return departmentUseCase.getDepartmentById(id);
     }
 
+    @DeleteMapping("/departments/{id}")
+    public ResponseEntity<Void> deleteDepartmentById(@PathVariable("id") Long id) {
+        departmentUseCase.deleteDepartment(id);
+
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/departments/{id}")
+    public ResponseEntity<Department> updateDepartment(@PathVariable("id") Long id, @Valid @RequestBody DepartmentDataContract department) {
+        Department updated = departmentUseCase.updateDepartment(departmentConverter.convertTask(department), id);
+
+        return ResponseEntity.ok(updated);
+    }
+
     @PostMapping("/departments")
     public ResponseEntity<Department> createDepartment(@Valid @RequestBody DepartmentDataContract department) {
 

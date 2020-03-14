@@ -115,6 +115,7 @@ class TasksAssignedComponent extends Component {
         render: (record) => (
           <Button
             className="button-cli"
+            style={{fontWeight: '600'}}
             onClick={() => this.finishTask(record)}
             disabled={record.done}>Finish</Button>
         ),

@@ -19,7 +19,6 @@ public class DepartmentUseCase {
         return departmentRepository.findAll();
     }
 
-
     public List<Department> getAllActiveDepartments() {
         return departmentRepository.findByActiveIsTrue();
     }
@@ -32,5 +31,19 @@ public class DepartmentUseCase {
     public Department createDepartment(Department department) {
         department.setCreationTime(LocalDateTime.now());
         return departmentRepository.save(department);
+    }
+
+    public Department updateDepartment(Department department, long id) {
+        department.setId(id);
+
+        return departmentRepository.save(department);
+    }
+
+    public void deleteDepartment(long id) {
+
+        departmentRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Department", "Department id", id));
+
+        departmentRepository.deleteById(id);
     }
 }
