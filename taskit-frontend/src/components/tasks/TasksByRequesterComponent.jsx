@@ -8,7 +8,7 @@ import 'antd/es/table/style/css';
 import 'antd/es/modal/style/css';
 import './tasks.css';
 
-class TasksAssignedComponent extends Component {
+class TasksByRequesterComponent extends Component {
 
   constructor(props) {
     super(props)
@@ -19,7 +19,7 @@ class TasksAssignedComponent extends Component {
   }
 
   componentDidMount() {
-    TaskService.getTasksByUserResponsible(AuthenticationService.getUserLoggedIn())
+    TaskService.getTasksByRequester(AuthenticationService.getUserLoggedIn())
 
       .then(response => {
         this.setState({ tasks: response.data.sort(function (a, b) { return a.done - b.done }) })
@@ -29,7 +29,7 @@ class TasksAssignedComponent extends Component {
   finishTask = (record) => {
     TaskService.finishTask(record.id)
       .then((response) => {
-        TaskService.getTasksByUserResponsible(AuthenticationService.getUserLoggedIn())
+        TaskService.getTasksByRequester(AuthenticationService.getUserLoggedIn())
           .then(response => {
             this.setState({ tasks: response.data.sort(function (a, b) { return a.done - b.done }) })
           })
@@ -85,6 +85,11 @@ class TasksAssignedComponent extends Component {
         key: 'requesterUsername'
       },
       {
+        title: 'Responsible',
+        dataIndex: 'responsibleUsername',
+        key: 'responsibleUsername'
+      },
+      {
         title: 'Target Date',
         dataIndex: 'targetDate',
         key: 'targetDate'
@@ -122,11 +127,11 @@ class TasksAssignedComponent extends Component {
       }];
 
     return (
-      <div className="TasksAssignedComponent">
+      <div className="TasksByRequesterComponent">
         <div className="div-bot">
           <h1 style={{ float: 'left' }}>
             <p style={{ display: 'inline', color: '#7422E6' }}>[ </p>
-            <p style={{ display: 'inline', color: '#696969' }}>Working tasks</p>
+            <p style={{ display: 'inline', color: '#696969' }}>Your tasks</p>
             <p style={{ display: 'inline', color: '#7422E6' }}> ]</p>
           </h1>
         </div>
@@ -144,4 +149,4 @@ class TasksAssignedComponent extends Component {
   }
 }
 
-export default TasksAssignedComponent;
+export default TasksByRequesterComponent;

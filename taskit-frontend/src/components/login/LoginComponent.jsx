@@ -28,10 +28,10 @@ class LoginComponent extends Component {
     AuthenticationService
       .executeAuthenticationService(this.state.username, this.state.password)
       .then(response => { AuthenticationService.setToken(response.data.token) })
-      .then(() => AuthenticationService.getUserByUsernameOrEmail(this.state.username))
+      .then(() => AuthenticationService.getUsernameByUsernameOrEmail(this.state.username))
       .then(username => {
         AuthenticationService.registerSuccesfulLogin(username)
-        this.props.history.push('/home/your-tasks')
+        this.props.history.push('/home/working-tasks')
       }).catch(() => {
         notification.error({
           message: 'Taskit',

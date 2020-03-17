@@ -92,8 +92,23 @@
   float: right;
 }
 
+.ant-dropdown-trigger.ant-dropdown-link.ant-dropdown-trigger.ant-dropdown-link  {
+  justify-content: center;
+  text-align: center;
+  font-size: 50px;
+  height: 100%;
+  width: 60px;
+  color: rgba(0, 0, 0, 0.65);
+  background-color: #7422E6;
+  font-weight:600;
+  float: right;
+  position: relative;
+  vertical-align: middle;
+  color: #03DAC5;
+}
+
 .icon-lo {
-  font-size: 16px;
+  font-size: 22px;
   position: relative;
   vertical-align: middle;
 }

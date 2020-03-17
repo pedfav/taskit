@@ -7,7 +7,11 @@ class TaskService {
   }
 
   getTasksByUserDepartment(username) {
-    return axios.get(`${API_BASE_URL}/task/users-department/${username}`)
+    return axios.get(`${API_BASE_URL}/task/user-department/${username}`)
+  }
+  
+  getTasksByRequester(username) {
+    return axios.get(`${API_BASE_URL}/task/user-requester/${username}`)
   }
   
   getTasksByUserResponsible(username) {

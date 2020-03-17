@@ -34,6 +34,8 @@ public class TaskDataContract {
     @NotBlank
     private String requesterUsername;
 
+    private String responsibleUsername;
+
     @NotNull
     private Urgency urgency;
 

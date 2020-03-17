@@ -25,14 +25,17 @@ class AuthenticationService {
 
   setToken(token) {
     localStorage.setItem('token', this.createJWTToken(token));
-    // this.setupAxiosInterceptors(this.createJWTToken(token))
   }
 
-  getUserByUsernameOrEmail(usernameOrEmail) {
+  getUsernameByUsernameOrEmail(usernameOrEmail) {
     return axios.get(`${API_BASE_URL}/users/username-or-email/` + usernameOrEmail)
       .then(response => {
         return response.data.username
       })
+  }
+
+  getUserByUsernameOrEmail(usernameOrEmail) {
+    return axios.get(`${API_BASE_URL}/users/username-or-email/` + usernameOrEmail);
   }
 
   logout() {

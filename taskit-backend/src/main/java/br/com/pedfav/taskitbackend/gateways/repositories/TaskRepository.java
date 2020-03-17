@@ -15,4 +15,6 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
     List<Task> findByDepartmentAndResponsibleIsNull(Department department);
 
     List<Task> findByResponsible(User user);
+
+    List<Task> findByRequester(User user);
 }

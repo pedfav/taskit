@@ -6,6 +6,8 @@ import br.com.pedfav.taskitbackend.entities.User;
 import br.com.pedfav.taskitbackend.http.datacontracts.TaskDataContract;
 import org.springframework.stereotype.Component;
 
+import java.util.Objects;
+
 @Component
 public class TaskConverter {
 
@@ -25,7 +27,14 @@ public class TaskConverter {
     }
 
     public TaskDataContract convertTask(Task task) {
-        return TaskDataContract.builder()
+
+        TaskDataContract.TaskDataContractBuilder taskDataContract = TaskDataContract.builder();
+
+        if (!Objects.isNull(task.getResponsible())) {
+            taskDataContract.responsibleUsername(task.getResponsible().getUsername());
+        }
+
+        return taskDataContract
                 .id(task.getId())
                 .title(task.getTitle())
                 .description(task.getDescription())

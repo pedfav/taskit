@@ -3,6 +3,7 @@ package br.com.pedfav.taskitbackend.http.converters;
 
 import br.com.pedfav.taskitbackend.entities.Department;
 import br.com.pedfav.taskitbackend.entities.User;
+import br.com.pedfav.taskitbackend.http.datacontracts.UserDataContract;
 import br.com.pedfav.taskitbackend.http.datacontracts.UserSignUpDataContract;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -24,6 +25,17 @@ public class UserConverter {
                 .department(Department.builder()
                         .id(dataContract.getIdDepartment())
                         .build())
+                .build();
+    }
+
+    public UserDataContract convertUser(User user) {
+        return UserDataContract.builder()
+                .id(user.getId())
+                .name(user.getUsername())
+                .username(user.getUsername())
+                .email(user.getEmail())
+                .birthday(user.getBirthday())
+                .idDepartment(user.getDepartment().getId())
                 .build();
     }
 }

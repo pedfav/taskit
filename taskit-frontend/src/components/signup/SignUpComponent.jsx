@@ -31,6 +31,9 @@ class SignUpComponent extends Component {
       password: {
         value: ''
       },
+      passwordValid: {
+        value: ''
+      },
       department: {
         value: ''
       },
@@ -278,11 +281,26 @@ class SignUpComponent extends Component {
     }
   }
 
+  validatePasswordValid = (password) => {
+    if (this.state.password.value === password) {
+      return {
+        validateStatus: 'success',
+        errorMsg: null,
+      };
+    } else {
+      return {
+        validateStatus: 'error',
+        errorMsg: 'Password is not the same'
+      }
+    }
+  }
+
   isFormValid() {
     return !(this.state.name.validateStatus === 'success' &&
       this.state.username.validateStatus === 'success' &&
       this.state.email.validateStatus === 'success' &&
       this.state.password.validateStatus === 'success' &&
+      this.state.passwordValid.validateStatus === 'success' &&
       this.state.department.validateStatus === 'success' &&
       this.state.birthday.validateStatus === 'success'
     );
@@ -297,7 +315,7 @@ class SignUpComponent extends Component {
         <Content>
           <div className="auth-wrapper">
             <div className="auth-inner">
-              <h1 style={{color: '#696969' }}>Sign Up</h1>
+              <h1 style={{ color: '#696969' }}>Sign Up</h1>
               <Form onSubmit={this.handleSubmit} className="signup-form">
                 <FormItem
                   className="form-group"
@@ -340,6 +358,7 @@ class SignUpComponent extends Component {
                     onBlur={this.isEmailAvailable} />
                 </FormItem>
                 <FormItem
+                  hasFeedback
                   className="form-group"
                   validateStatus={this.state.password.validateStatus}
                   help={this.state.password.errorMsg}>
@@ -351,6 +370,20 @@ class SignUpComponent extends Component {
                     placeholder="Password"
                     value={this.state.password.value}
                     onChange={(event) => this.handleChange(event, this.validatePassword)} />
+                </FormItem>
+                <FormItem
+                  hasFeedback
+                  className="form-group"
+                  validateStatus={this.state.passwordValid.validateStatus}
+                  help={this.state.passwordValid.errorMsg}>
+                  <Input
+                    size="large"
+                    name="passwordValid"
+                    type="password"
+                    autoComplete="off"
+                    placeholder="Password"
+                    value={this.state.passwordValid.value}
+                    onChange={(event) => this.handleChange(event, this.validatePasswordValid)} />
                 </FormItem>
                 <FormItem
                   className="form-group"

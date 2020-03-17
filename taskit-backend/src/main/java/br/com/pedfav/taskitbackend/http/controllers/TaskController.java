@@ -35,7 +35,7 @@ public class TaskController {
         return ResponseEntity.created(location).body(new TaskCreatedDataContract(created.getId()));
     }
 
-    @GetMapping(value = "/task/users-department/{username}")
+    @GetMapping(value = "/task/user-department/{username}")
     public ResponseEntity<List<TaskDataContract>> tasksByUserDepartment(@PathVariable("username") String username) {
 
         List<TaskDataContract> tasks = taskUseCase.tasksByUserDepartment(username)
@@ -47,9 +47,20 @@ public class TaskController {
     }
 
     @GetMapping(value = "/task/user-responsible/{username}")
-    public ResponseEntity<List<TaskDataContract>> tasksByUserResponsible(@PathVariable("username") String username) {
+    public ResponseEntity<List<TaskDataContract>> tasksByResponsibleUser(@PathVariable("username") String username) {
 
-        List<TaskDataContract> tasks = taskUseCase.tasksByUserResponsible(username)
+        List<TaskDataContract> tasks = taskUseCase.tasksByResponsibleUser(username)
+                .stream()
+                .map(taskConverter::convertTask)
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(tasks);
+    }
+
+    @GetMapping(value = "/task/user-requester/{username}")
+    public ResponseEntity<List<TaskDataContract>> tasksByUserRequester(@PathVariable("username") String username) {
+
+        List<TaskDataContract> tasks = taskUseCase.tasksByRequesterUser(username)
                 .stream()
                 .map(taskConverter::convertTask)
                 .collect(Collectors.toList());

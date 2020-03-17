@@ -44,12 +44,25 @@ public class TaskUseCase {
         }
     }
 
-    public List<Task> tasksByUserResponsible(String username) {
+    public List<Task> tasksByResponsibleUser(String username) {
+
+        try {
+
+            User user = userUseCase.getUserByUsername(username);
+
+            return taskRepository.findByResponsible(user);
+
+        } catch (RuntimeException e) {
+            throw new ResourceNotFoundException("Tasks", "username", username);
+        }
+    }
+
+    public List<Task> tasksByRequesterUser(String username) {
 
         try {
             User user = userUseCase.getUserByUsername(username);
 
-            return taskRepository.findByResponsible(user);
+            return taskRepository.findByRequester(user);
 
         } catch (RuntimeException e) {
             throw new ResourceNotFoundException("Tasks", "username", username);

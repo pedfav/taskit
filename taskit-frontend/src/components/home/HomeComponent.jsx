@@ -5,11 +5,15 @@ import CreateDepartmentComponent from '../department/CreateDepartmentComponent';
 import CreateTaskComponent from '../tasks/CreateTaskComponent';
 import TasksByDepartmentComponent from '../tasks/TasksByDepartmentComponent'
 import TasksAssignedComponent from '../tasks/TasksAssignedComponent'
+import TasksByRequesterComponent from '../tasks/TasksByRequesterComponent'
 import AuthenticationService from '../common/AuthenticationService';
+import ProfileComponent from '../profile/ProfileComponent';
 import { FaTasks } from "react-icons/fa";
 import { GoOrganization } from "react-icons/go";
+import { IoIosLogOut, IoMdPerson } from "react-icons/io";
+import { GiPlagueDoctorProfile } from "react-icons/gi";
 
-import { Layout, Menu, Icon, Button } from 'antd';
+import { Layout, Menu, Icon, Button, Dropdown } from 'antd';
 import 'antd/es/menu/style/css'
 import './home.css';
 import ListDepartmentComponent from '../department/ListDepartmentComponent';
@@ -26,8 +30,8 @@ class HomeComponent extends Component {
     this.props.history.push('/home/new-department')
   }
 
-  renderYourTaskGrid = () => {
-    this.props.history.push('/home/your-tasks')
+  renderWorkingTaskGrid = () => {
+    this.props.history.push('/home/working-tasks')
   }
 
   renderDepartmentTaskGrid = () => {
@@ -36,6 +40,14 @@ class HomeComponent extends Component {
 
   renderListDepartment = () => {
     this.props.history.push('/home/list-departments')
+  }
+
+  renderYourTasks = () => {
+    this.props.history.push('/home/your-tasks')
+  }
+
+  renderProfile = () => {
+    this.props.history.push('/home/profile')
   }
 
   logout = () => {
@@ -48,7 +60,40 @@ class HomeComponent extends Component {
       <div className="HomeComponent">
         <Layout>
           <Header className="header-home">
-            <Button className="button-logout" onClick={this.logout}>Logout<Icon className="icon-lo" type="logout" /></Button>
+            {/* <Button className="button-logout" onClick={this.logout}>Logout<Icon className="icon-lo" type="logout" /></Button> */}
+            <Dropdown overlay={
+              <Menu style={{ alignContent: 'right' }}>
+                <Menu.ItemGroup style={{ width: '150px' }}
+                  key="0">
+                  <div>
+                    <span style={{ paddingLeft: '8px', verticalAlign: 'middle' }}>
+                      {`Hello, ${AuthenticationService.getUserLoggedIn()}`}
+                    </span>
+                  </div>
+                </Menu.ItemGroup>
+                <Menu.Divider />
+                <Menu.Item style={{ width: '150px' }}
+                  key="1"
+                  onClick={this.renderProfile}>
+                  <div>
+                    <GiPlagueDoctorProfile style={{ verticalAlign: 'middle', fontSize: '20px' }} />
+                    <span style={{ paddingLeft: '8px', verticalAlign: 'middle' }}>Profile</span>
+                  </div>
+                </Menu.Item>
+                <Menu.Item
+                  key="2"
+                  onClick={this.logout}>
+                  <div>
+                    <IoIosLogOut style={{ verticalAlign: 'middle', fontSize: '20px' }} />
+                    <span style={{ paddingLeft: '8px', verticalAlign: 'middle' }}>Logout</span>
+                  </div>
+                </Menu.Item>
+              </Menu>
+            } trigger={['click']}>
+              <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
+                <Icon style={{ fontSize: '30px' }} className="icon-lo" type="down" />
+              </a>
+            </Dropdown>
           </Header>
           <Layout>
             <Sider className="sider">
@@ -71,8 +116,13 @@ class HomeComponent extends Component {
                   </Menu.Item>
                   <Menu.Item
                     key="3"
-                    onClick={this.renderYourTaskGrid}>
-                    <span>Your Tasks</span>
+                    onClick={this.renderWorkingTaskGrid}>
+                    <span>Working tasks</span>
+                  </Menu.Item>
+                  <Menu.Item
+                    key="4"
+                    onClick={this.renderYourTasks}>
+                    <span>Opened by you</span>
                   </Menu.Item>
                 </Menu.ItemGroup>
                 <Menu.ItemGroup key="g2" title={
@@ -82,12 +132,12 @@ class HomeComponent extends Component {
                   </div>
                 }>
                   <Menu.Item
-                    key="4"
+                    key="5"
                     onClick={this.renderNewDepartment}>
                     <span>New department</span>
                   </Menu.Item>
                   <Menu.Item
-                    key="5"
+                    key="6"
                     onClick={this.renderListDepartment}>
                     <span>List departments</span>
                   </Menu.Item>
@@ -98,9 +148,11 @@ class HomeComponent extends Component {
               <Switch>
                 <AuthenticatedRoute path="/home/new-task" component={CreateTaskComponent} />
                 <AuthenticatedRoute path="/home/department-tasks" component={TasksByDepartmentComponent} />
-                <AuthenticatedRoute path="/home/your-tasks" component={TasksAssignedComponent} />
+                <AuthenticatedRoute path="/home/working-tasks" component={TasksAssignedComponent} />
                 <AuthenticatedRoute path="/home/new-department" component={CreateDepartmentComponent} />
                 <AuthenticatedRoute path="/home/list-departments" component={ListDepartmentComponent} />
+                <AuthenticatedRoute path="/home/your-tasks" component={TasksByRequesterComponent} />
+                <AuthenticatedRoute path="/home/profile" component={ProfileComponent} />
               </Switch>
             </Content>
           </Layout>
