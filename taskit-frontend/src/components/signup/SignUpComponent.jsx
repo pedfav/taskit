@@ -3,6 +3,7 @@ import { Layout, Form, Input, DatePicker, Button, Select, notification } from 'a
 import { Link } from 'react-router-dom';
 import DepartmentService from '../department/DepartmentService.js';
 import AuthenticationService from '../common/AuthenticationService.js';
+import Logo from '../login/logo.png';
 import './signup.css';
 import 'antd/es/date-picker/style/css'
 import 'antd/es/form/style/css'
@@ -310,11 +311,13 @@ class SignUpComponent extends Component {
     return (
       <div className="SignUpComponent">
         <Header className="header-signup">
-          <div className="text">Taskit</div>
+          <div className="text">
+            <img style={{zoom: '12%' }} src={Logo} />
+          </div>
         </Header>
         <Content>
           <div className="auth-wrapper">
-            <div className="auth-inner">
+            <div className="auth-inner-su">
               <h1 style={{ color: '#696969' }}>Sign Up</h1>
               <Form onSubmit={this.handleSubmit} className="signup-form">
                 <FormItem

@@ -176,11 +176,11 @@ class CreateTaskComponent extends Component {
       <div className="CreateTaskComponent">
         <div className="create-task-form">
           <h1 style={{ float: 'left', marginTop: '10px' }} className="page-title">
-            <p style={{display: 'inline', color: '#7422E6'}}>[ </p>
-            <p style={{display: 'inline', color: '#696969'}}>Create Task</p>
-            <p style={{display: 'inline', color: '#7422E6'}}> ]</p>
+            <p style={{ display: 'inline', color: '#7422E6' }}>[ </p>
+            <p style={{ display: 'inline', color: '#696969' }}>Create Task</p>
+            <p style={{ display: 'inline', color: '#7422E6' }}> ]</p>
           </h1>
-          <Form onSubmit={this.handleSubmit} style={{marginTop: '80px'}}>
+          <Form onSubmit={this.handleSubmit} style={{ marginTop: '80px' }}>
             <FormItem
               validateStatus={this.state.title.validateStatus}
               help={this.state.title.errorMsg}>
@@ -235,9 +235,9 @@ class CreateTaskComponent extends Component {
               validateStatus={this.state.urgency.validateStatus}
               help={this.state.urgency.errorMsg}>
               <div className="radio">
-              <h6 style={{color: '#696969', paddingTop: '7px'}}>Urgency: </h6>
+                <h6 style={{ color: '#696969', paddingTop: '7px' }}>Urgency: </h6>
                 <Radio.Group
-                  style={{paddingLeft: '15px'}}
+                  style={{ paddingLeft: '15px' }}
                   defaultValue="LOW"
                   onChange={this.handleUrgencyChange}
                   name="urgency"

@@ -119,64 +119,62 @@ class CreateDepartmentComponent extends Component {
   render() {
     return (
       <div className="CreateDepartmentComponent">
-        <div className="CreateTaskComponent">
-          <div className="create-task-form">
-            <h1 style={{ float: 'left', marginTop: '10px' }} className="page-title">
-              <p style={{ display: 'inline', color: '#7422E6' }}>[ </p>
-              <p style={{ display: 'inline', color: '#696969' }}>Create Task</p>
-              <p style={{ display: 'inline', color: '#7422E6' }}> ]</p>
-            </h1>
-            <Form onSubmit={this.handleSubmit} style={{ marginTop: '80px' }}>
-              <FormItem
-                validateStatus={this.state.title.validateStatus}
-                help={this.state.title.errorMsg}>
-                <Input
-                  size="large"
-                  name="title"
-                  autoComplete="off"
-                  placeholder="Department title"
-                  value={this.state.title.value}
-                  onChange={(event) => this.handleChange(event, this.validateTitle)} />
-              </FormItem>
-              <FormItem
-                validateStatus={this.state.description.validateStatus}
-                help={this.state.description.errorMsg}>
-                <TextArea
-                  style={{ height: '80px' }}
-                  size="large"
-                  name="description"
-                  autoComplete="off"
-                  placeholder="Description"
-                  value={this.state.description.value}
-                  onChange={(event) => this.handleChange(event, this.validateDescription)} />
-              </FormItem>
-              <FormItem
-                className="form-group"
-                validateStatus={this.state.active.validateStatus}
-                help={this.state.active.errorMsg}>
-                <div className="radio">
-                  <h6 style={{ color: '#696969', paddingTop: '7px' }}>Urgency: </h6>
-                  <Radio.Group
-                    style={{ paddingLeft: '15px' }}
-                    defaultValue="LOW"
-                    onChange={this.handleRadioChange}
-                    name="urgency"
-                    value={this.state.active.value}>
-                    <Radio.Button value="true">Active</Radio.Button>
-                    <Radio.Button value="false">Inactive</Radio.Button>
-                  </Radio.Group>
-                </div>
-              </FormItem>
-              <FormItem>
-                <Button
-                  disabled={this.isFormValid()}
-                  htmlType="submit"
-                  className="button-su btn-block"
-                  size="large">
-                  Create department</Button>
-              </FormItem>
-            </Form>
-          </div>
+        <div className="create-task-form">
+          <h1 style={{ float: 'left', marginTop: '10px' }} className="page-title">
+            <p style={{ display: 'inline', color: '#7422E6' }}>[ </p>
+            <p style={{ display: 'inline', color: '#696969' }}>Create Task</p>
+            <p style={{ display: 'inline', color: '#7422E6' }}> ]</p>
+          </h1>
+          <Form onSubmit={this.handleSubmit} style={{ marginTop: '80px' }}>
+            <FormItem
+              validateStatus={this.state.title.validateStatus}
+              help={this.state.title.errorMsg}>
+              <Input
+                size="large"
+                name="title"
+                autoComplete="off"
+                placeholder="Department title"
+                value={this.state.title.value}
+                onChange={(event) => this.handleChange(event, this.validateTitle)} />
+            </FormItem>
+            <FormItem
+              validateStatus={this.state.description.validateStatus}
+              help={this.state.description.errorMsg}>
+              <TextArea
+                style={{ height: '80px' }}
+                size="large"
+                name="description"
+                autoComplete="off"
+                placeholder="Description"
+                value={this.state.description.value}
+                onChange={(event) => this.handleChange(event, this.validateDescription)} />
+            </FormItem>
+            <FormItem
+              className="form-group"
+              validateStatus={this.state.active.validateStatus}
+              help={this.state.active.errorMsg}>
+              <div className="radio">
+                <h6 style={{ color: '#696969', paddingTop: '7px' }}>Urgency: </h6>
+                <Radio.Group
+                  style={{ paddingLeft: '15px' }}
+                  defaultValue="LOW"
+                  onChange={this.handleRadioChange}
+                  name="urgency"
+                  value={this.state.active.value}>
+                  <Radio.Button value="true">Active</Radio.Button>
+                  <Radio.Button value="false">Inactive</Radio.Button>
+                </Radio.Group>
+              </div>
+            </FormItem>
+            <FormItem>
+              <Button
+                disabled={this.isFormValid()}
+                htmlType="submit"
+                className="button-su btn-block"
+                size="large">
+                Create department</Button>
+            </FormItem>
+          </Form>
         </div>
       </div>
     );

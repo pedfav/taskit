@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Table, Tag, Icon, Modal, Form, Input, Radio, Button, notification } from 'antd';
+import { Table, Tag, Icon, Modal, Form, Input, Radio, notification } from 'antd';
 import DepartmentService from './DepartmentService.js'
 import TextArea from 'antd/lib/input/TextArea';
 

@@ -1,0 +1,29 @@
+.grid-profile {
+  max-width: 800px;
+  margin: 0 auto;
+  padding-top: 10px;
+  padding-left: 140px;
+  padding-right: 10px;
+  table-layout: fixed;
+  align-content: center; 
+}
+
+.col-form-label.col-form-label {
+  padding-top: calc(.375rem + 1px);
+  padding-bottom: calc(.375rem + 1px);
+  margin-bottom: 0;
+  font-size: inherit;
+  line-height: 1.5;
+  text-align: left;
+}
+
+.no-border {
+  outline: none;
+  text-align: left;
+}
+
+.label-fields {
+  color: #696969;
+  font-size: 20px;
+  border-bottom: 2px solid #7422E6;
+}

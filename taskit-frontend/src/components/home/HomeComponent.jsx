@@ -12,6 +12,7 @@ import { FaTasks } from "react-icons/fa";
 import { GoOrganization } from "react-icons/go";
 import { IoIosLogOut, IoMdPerson } from "react-icons/io";
 import { GiPlagueDoctorProfile } from "react-icons/gi";
+import Logo from '../login/logo.png';
 
 import { Layout, Menu, Icon, Button, Dropdown } from 'antd';
 import 'antd/es/menu/style/css'
@@ -60,7 +61,13 @@ class HomeComponent extends Component {
       <div className="HomeComponent">
         <Layout>
           <Header className="header-home">
-            {/* <Button className="button-logout" onClick={this.logout}>Logout<Icon className="icon-lo" type="logout" /></Button> */}
+            <img style={{
+              zoom: '12%',
+              float: 'center',
+              paddingLeft: '200px',
+              paddingTop: '150px',
+            }}
+              src={Logo} />
             <Dropdown overlay={
               <Menu style={{ alignContent: 'right' }}>
                 <Menu.ItemGroup style={{ width: '150px' }}
@@ -76,7 +83,7 @@ class HomeComponent extends Component {
                   key="1"
                   onClick={this.renderProfile}>
                   <div>
-                    <GiPlagueDoctorProfile style={{ verticalAlign: 'middle', fontSize: '20px' }} />
+                    <IoMdPerson style={{ verticalAlign: 'middle', fontSize: '20px' }} />
                     <span style={{ paddingLeft: '8px', verticalAlign: 'middle' }}>Profile</span>
                   </div>
                 </Menu.Item>

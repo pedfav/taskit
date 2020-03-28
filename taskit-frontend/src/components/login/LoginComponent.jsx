@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Layout, notification } from 'antd';
 import './login.css';
 import 'antd/es/notification/style/css'
+import Logo from './logo.png';
 
 
 const { Header, Footer, Content } = Layout;
@@ -45,12 +46,14 @@ class LoginComponent extends Component {
       <div className="LoginComponent">
         <Layout>
           <Header className="header-login">
-            <div className="text">Taskit</div>
+            <div className="text">
+              <img style={{ zoom: '12%' }} src={Logo} />
+            </div>
           </Header>
           <Content>
             <div className="auth-wrapper">
               <div className="auth-inner">
-                <h1 style={{color: '#696969' }}>Sign in</h1>
+                <h1 style={{ color: '#696969' }}>Sign in</h1>
                 <div className="form-group">
                   <input type="text" name="username" placeholder="Username or Email" className="form-control" value={this.state.username} onChange={this.handleChange} />
                 </div>

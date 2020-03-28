@@ -1,15 +1,15 @@
 package br.com.pedfav.taskitbackend.http.controllers;
 
 import br.com.pedfav.taskitbackend.http.converters.UserConverter;
+import br.com.pedfav.taskitbackend.http.datacontracts.ChangePasswordDataContract;
 import br.com.pedfav.taskitbackend.http.datacontracts.UserAvailabilityDataContract;
 import br.com.pedfav.taskitbackend.http.datacontracts.UserDataContract;
 import br.com.pedfav.taskitbackend.usecases.UserUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
@@ -37,5 +37,21 @@ public class UserController {
         UserDataContract userDataContract = userConverter.convertUser(userUseCase.getUserByEmailOrUserName(usernameOrEmail));
 
         return ResponseEntity.ok(userDataContract);
+    }
+
+    @PutMapping("/users/{id}")
+    public ResponseEntity<UserDataContract> updateUsersDepartment(@PathVariable("id") Long id, @RequestBody UserDataContract userDataContract) {
+
+        UserDataContract updated = userConverter.convertUser(userUseCase.updateDepartmentId(id, userDataContract.getIdDepartment()));
+
+        return ResponseEntity.ok(updated);
+    }
+
+    @PatchMapping("/users/change-password")
+    public ResponseEntity<Void> changePassword(@Valid @RequestBody ChangePasswordDataContract dataContract) {
+
+        userUseCase.changePassword(dataContract.getUsername(), dataContract.getOldPassword(), dataContract.getNewPassword());
+
+        return ResponseEntity.ok().build();
     }
 }
