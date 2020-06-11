@@ -122,7 +122,7 @@ class CreateDepartmentComponent extends Component {
         <div className="create-task-form">
           <h1 style={{ float: 'left', marginTop: '10px' }} className="page-title">
             <p style={{ display: 'inline', color: '#7422E6' }}>[ </p>
-            <p style={{ display: 'inline', color: '#696969' }}>Create Task</p>
+            <p style={{ display: 'inline', color: '#696969' }}>Create Department</p>
             <p style={{ display: 'inline', color: '#7422E6' }}> ]</p>
           </h1>
           <Form onSubmit={this.handleSubmit} style={{ marginTop: '80px' }}>
