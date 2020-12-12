@@ -2,6 +2,7 @@ package br.com.pedfav.taskitbackend.usecases;
 
 
 import br.com.pedfav.taskitbackend.entities.Department;
+import br.com.pedfav.taskitbackend.entities.KnowledgeTag;
 import br.com.pedfav.taskitbackend.entities.Role;
 import br.com.pedfav.taskitbackend.entities.User;
 import br.com.pedfav.taskitbackend.enums.RoleName;
@@ -25,6 +26,7 @@ public class UserUseCase {
     private final RoleRepository roleRepository;
     private final DepartmentUseCase departmentUseCase;
     private final PasswordEncoder passwordEncoder;
+    private final KnowledgeTagUseCase knowledgeTagUseCase;
 
     public User saveUserSignedUp(User user) {
         if (userRepository.existsByUsername(user.getUsername()) || userRepository.existsByEmail(user.getEmail())) {
@@ -47,6 +49,11 @@ public class UserUseCase {
 
     public Boolean checkEmailAvailability(String email) {
         return !userRepository.existsByEmail(email);
+    }
+
+    public User findById(Long id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("User", "Id", id));
     }
 
     public User getUserByEmailOrUserName(String emailOrUsername) {
@@ -81,5 +88,16 @@ public class UserUseCase {
         }
 
         userRepository.save(user);
+    }
+
+    public User addKnowledgeTag(KnowledgeTag knowledgeTag, Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("User", "Id", userId));
+
+        KnowledgeTag databaseKnowledgeTag = knowledgeTagUseCase.getById(knowledgeTag.getId());
+
+        user.getKnowledgeTags().add(databaseKnowledgeTag);
+
+        return userRepository.save(user);
     }
 }

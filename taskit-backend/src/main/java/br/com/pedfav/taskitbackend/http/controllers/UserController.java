@@ -1,10 +1,14 @@
 package br.com.pedfav.taskitbackend.http.controllers;
 
+import br.com.pedfav.taskitbackend.entities.KnowledgeTag;
+import br.com.pedfav.taskitbackend.entities.User;
 import br.com.pedfav.taskitbackend.http.converters.UserConverter;
 import br.com.pedfav.taskitbackend.http.datacontracts.ChangePasswordDataContract;
+import br.com.pedfav.taskitbackend.http.datacontracts.KnowledgeTagDataContract;
 import br.com.pedfav.taskitbackend.http.datacontracts.UserAvailabilityDataContract;
 import br.com.pedfav.taskitbackend.http.datacontracts.UserDataContract;
 import br.com.pedfav.taskitbackend.usecases.UserUseCase;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +22,7 @@ public class UserController {
 
     private final UserUseCase userUseCase;
     private final UserConverter userConverter;
+    private final ObjectMapper mapper;
 
     @GetMapping("/users/username-availability/{username}")
     public UserAvailabilityDataContract checkUsernameAvailability(@PathVariable("username") String username) {
@@ -39,6 +44,11 @@ public class UserController {
         return ResponseEntity.ok(userDataContract);
     }
 
+    @GetMapping("/users/{id}")
+    public ResponseEntity<User> findById(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(userUseCase.findById(id));
+    }
+
     @PutMapping("/users/{id}")
     public ResponseEntity<UserDataContract> updateUsersDepartment(@PathVariable("id") Long id, @RequestBody UserDataContract userDataContract) {
 
@@ -53,5 +63,17 @@ public class UserController {
         userUseCase.changePassword(dataContract.getUsername(), dataContract.getOldPassword(), dataContract.getNewPassword());
 
         return ResponseEntity.ok().build();
+    }
+
+    @PatchMapping("/users/add-knowledge-tag/{user-id}")
+    public ResponseEntity<User> addKnowledgeTag(@PathVariable("user-id") Long userId,
+                                                @RequestBody KnowledgeTagDataContract knowledgeTagDataContract) {
+
+        KnowledgeTag knowledgeTag = mapper.convertValue(knowledgeTagDataContract, KnowledgeTag.class);
+
+        User userToReturn = userUseCase.addKnowledgeTag(knowledgeTag, userId);
+
+        return ResponseEntity.ok(userToReturn);
+
     }
 }

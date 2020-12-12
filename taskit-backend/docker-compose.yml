@@ -1,0 +1,14 @@
+
+  # Database Service (Mysql)
+  db:
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    restart: always
+    environment:
+      MYSQL_DATABASE: taskit
+      MYSQL_USER: taskit
+      MYSQL_PASSWORD: taskit123
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - db-data:/var/lib/mysql
