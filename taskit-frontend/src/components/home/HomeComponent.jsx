@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import { Switch } from 'react-router-dom';
 import AuthenticatedRoute from '../common/AuthenticatedRoute';
 import CreateDepartmentComponent from '../department/CreateDepartmentComponent';
+import CreateKnowledgeTagComponent from '../tag/CreateKnowledgeTagComponent';
 import CreateTaskComponent from '../tasks/CreateTaskComponent';
 import TasksByDepartmentComponent from '../tasks/TasksByDepartmentComponent'
 import TasksAssignedComponent from '../tasks/TasksAssignedComponent'
 import TasksByRequesterComponent from '../tasks/TasksByRequesterComponent'
 import AuthenticationService from '../common/AuthenticationService';
 import ProfileComponent from '../profile/ProfileComponent';
-import { FaTasks } from "react-icons/fa";
+import { FaTasks, FaSearch, FaTags } from "react-icons/fa";
 import { GoOrganization } from "react-icons/go";
 import { IoIosLogOut, IoMdPerson } from "react-icons/io";
 import { GiPlagueDoctorProfile } from "react-icons/gi";
@@ -29,6 +30,10 @@ class HomeComponent extends Component {
 
   renderNewDepartment = () => {
     this.props.history.push('/home/new-department')
+  }  
+  
+  renderNewKnowledgeTag = () => {
+    this.props.history.push('/home/new-knowledge-tag')
   }
 
   renderWorkingTaskGrid = () => {
@@ -83,7 +88,7 @@ class HomeComponent extends Component {
                   key="1"
                   onClick={this.renderProfile}>
                   <div>
-                    <IoMdPerson style={{ verticalAlign: 'middle', fontSize: '20px' }} />
+                    <GiPlagueDoctorProfile style={{ verticalAlign: 'middle', fontSize: '20px' }} />
                     <span style={{ paddingLeft: '8px', verticalAlign: 'middle' }}>Profile</span>
                   </div>
                 </Menu.Item>
@@ -149,6 +154,30 @@ class HomeComponent extends Component {
                     <span>List departments</span>
                   </Menu.Item>
                 </Menu.ItemGroup>
+                <Menu.ItemGroup key="g3" title={
+                  <div>
+                    <FaTags style={{ verticalAlign: 'middle' }} />
+                    <span style={{ paddingLeft: '8px', verticalAlign: 'middle' }}>Knowledge tags</span>
+                  </div>
+                }>
+                  <Menu.Item
+                    key="7"
+                    onClick={this.renderNewKnowledgeTag}>
+                    <span>Manage knowledge tag</span>
+                  </Menu.Item>
+                </Menu.ItemGroup>
+                <Menu.ItemGroup key="g4" title={
+                  <div>
+                    <FaSearch style={{ verticalAlign: 'middle' }} />
+                    <span style={{ paddingLeft: '8px', verticalAlign: 'middle' }}>Find</span>
+                  </div>
+                }>
+                  <Menu.Item
+                    key="8"
+                    onClick={this.renderNewDepartment}>
+                    <span>Find user by knowledge</span>
+                  </Menu.Item>
+                </Menu.ItemGroup>
               </Menu>
             </Sider>
             <Content>
@@ -157,6 +186,7 @@ class HomeComponent extends Component {
                 <AuthenticatedRoute path="/home/department-tasks" component={TasksByDepartmentComponent} />
                 <AuthenticatedRoute path="/home/working-tasks" component={TasksAssignedComponent} />
                 <AuthenticatedRoute path="/home/new-department" component={CreateDepartmentComponent} />
+                <AuthenticatedRoute path="/home/new-knowledge-tag" component={CreateKnowledgeTagComponent} />
                 <AuthenticatedRoute path="/home/list-departments" component={ListDepartmentComponent} />
                 <AuthenticatedRoute path="/home/your-tasks" component={TasksByRequesterComponent} />
                 <AuthenticatedRoute path="/home/profile" component={ProfileComponent} />

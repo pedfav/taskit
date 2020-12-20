@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import DepartmentService from '../department/DepartmentService.js';
-import { Icon, Tooltip, Modal, Select, Input, Form as FormAntd, notification } from 'antd';
+import { Icon, Tooltip, Modal, Select, Input, Form as FormAntd, notification, AutoComplete } from 'antd';
 import AuthenticationService from '../common/AuthenticationService.js'
 import UserService from './UserService.js'
+import KnowledgeTagsService from './KnowledgeTagsService.js'
 import './profile.css';
 import 'antd/es/form/style/css'
 import Row from 'react-bootstrap/Row'
@@ -11,6 +12,12 @@ import Form from 'react-bootstrap/Form'
 
 const FormItem = FormAntd.Item;
 const { Option } = Select;
+
+const options = [
+  { value: 'Burns Bay Road' },
+  { value: 'Downing Street' },
+  { value: 'Wall Street' },
+];
 
 class ProfileComponent extends Component {
 
@@ -45,7 +52,10 @@ class ProfileComponent extends Component {
       },
       visibleDepartment: false,
       visiblePassword: false,
-      departments: []
+      departments: [],
+      options: [{ value: 'Burns Bay Road' },
+      { value: 'Downing Street' },
+      { value: 'Wall Street' }]
     }
   }
 
@@ -96,7 +106,6 @@ class ProfileComponent extends Component {
   };
 
   handleOk = e => {
-    console.log('ok')
     this.setState({
       visibleDepartment: false,
     });
@@ -106,7 +115,6 @@ class ProfileComponent extends Component {
       idDepartment: this.state.department.value
     }
 
-    console.log(user)
     UserService.updateUserDepartment(user)
       .then(response => {
         notification.success({
@@ -262,6 +270,13 @@ class ProfileComponent extends Component {
     );
   }
 
+  getAutoCompleteTags = (name) => {
+    KnowledgeTagsService.getAutocompletetags(name)
+      .then(response => {
+        console.log(response.data)
+      })
+  }
+
   render() {
     return (
       <div className="ProfileComponent">
@@ -304,7 +319,7 @@ class ProfileComponent extends Component {
                 <Form.Control className="label-fields no-border" plaintext readOnly defaultValue={this.state.birthday.value} />
               </Col>
             </Form.Group>
-            <Form.Group as={Row} controlId="4">
+            <Form.Group as={Row} controlId="5">
               <Form.Label column sm="3">
                 <div className="label-fields no-border">Department:</div>
               </Form.Label>
@@ -325,7 +340,7 @@ class ProfileComponent extends Component {
                 </Tooltip>
               </Col>
             </Form.Group>
-            <Form.Group as={Row} controlId="4">
+            <Form.Group as={Row} controlId="6">
               <Form.Label column sm="3">
                 <div className="label-fields no-border">Password:</div>
               </Form.Label>
@@ -340,6 +355,20 @@ class ProfileComponent extends Component {
                     type="edit"
                     onClick={() => this.showModalPassword()} />
                 </Tooltip>
+              </Col>
+            </Form.Group>
+            <Form.Group as={Row} controlId="7">
+              <Form.Label column sm="3">
+                <div className="label-fields no-border">Add tag:</div>
+              </Form.Label>
+              <Col sm="5">
+                <AutoComplete
+                  options={options}
+                  onChange={(event) => this.getAutoCompleteTags(event)}
+                  filterOption={(inputValue, option) =>
+                    option.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
+                  }
+                />
               </Col>
             </Form.Group>
           </Form>
