@@ -46,6 +46,7 @@ out/
 # mpeltonen/sbt-idea plugin
 .idea_modules/
 
+
 # JIRA plugin
 atlassian-ide-plugin.xml
 
@@ -82,4 +83,8 @@ fabric.properties
 .idea/**/markdown-navigator.xml
 .idea/**/markdown-navigator/
 
+# others
+.DS_Store
+
 # End of https://www.gitignore.io/api/intellij
+
