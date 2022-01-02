@@ -13,12 +13,6 @@ import Form from 'react-bootstrap/Form'
 const FormItem = FormAntd.Item;
 const { Option } = Select;
 
-const options = [
-  { value: 'Burns Bay Road' },
-  { value: 'Downing Street' },
-  { value: 'Wall Street' },
-];
-
 class ProfileComponent extends Component {
 
   constructor(props) {
@@ -53,9 +47,7 @@ class ProfileComponent extends Component {
       visibleDepartment: false,
       visiblePassword: false,
       departments: [],
-      options: [{ value: 'Burns Bay Road' },
-      { value: 'Downing Street' },
-      { value: 'Wall Street' }]
+      options: []
     }
   }
 
@@ -273,11 +265,36 @@ class ProfileComponent extends Component {
   getAutoCompleteTags = (name) => {
     KnowledgeTagsService.getAutocompletetags(name)
       .then(response => {
-        console.log(response.data)
+        this.setState({
+          options: response.data.map(this.extractTag)
+        })
+        console.log(this.state.options)
       })
   }
 
+  extractTag(tag) {
+    return tag.name
+  }
+
+  onSelect = (value) => {
+    console.log('onSelect', value);
+    this.setState({
+      options: [value]
+    })
+  }
+
   render() {
+    const formItemLayout = {
+      labelCol: {
+        xs: { span: 24 },
+        sm: { span: 8 },
+      },
+      wrapperCol: {
+        xs: { span: 24 },
+        sm: { span: 16 },
+      },
+    };
+
     return (
       <div className="ProfileComponent">
         <div className="grid-profile">
@@ -287,48 +304,32 @@ class ProfileComponent extends Component {
             <p style={{ display: 'inline', color: '#7422E6' }}> ]</p>
           </h1>
           <Form style={{ marginTop: '80px' }}>
-            <Form.Group as={Row} controlId="1">
-              <Form.Label column sm="3">
-                <div className="label-fields">Name:</div>
-              </Form.Label>
-              <Col sm="9">
-                <Form.Control className="label-fields no-border" plaintext readOnly defaultValue={this.state.name.value} />
-              </Col>
-            </Form.Group>
-            <Form.Group as={Row} controlId="2">
-              <Form.Label column sm="3">
-                <div className="label-fields">Username:</div>
-              </Form.Label>
-              <Col sm="9">
-                <Form.Control className="label-fields no-border" plaintext readOnly defaultValue={this.state.username.value} />
-              </Col>
-            </Form.Group>
-            <Form.Group as={Row} controlId="3">
-              <Form.Label column sm="3">
-                <div className="label-fields">Email:</div>
-              </Form.Label>
-              <Col sm="9">
-                <Form.Control className="label-fields no-border" plaintext readOnly defaultValue={this.state.email.value} />
-              </Col>
-            </Form.Group>
-            <Form.Group as={Row} controlId="4">
-              <Form.Label column sm="3">
-                <div className="label-fields">Birthday:</div>
-              </Form.Label>
-              <Col sm="9">
-                <Form.Control className="label-fields no-border" plaintext readOnly defaultValue={this.state.birthday.value} />
-              </Col>
-            </Form.Group>
+            <Form.Row className="align-items-left">
+              <Form.Group as={Col} md="8" controlId="1">
+                  <Form.Label className="label-fields">Name</Form.Label>
+                  <Form.Control type="text" readOnly defaultValue={this.state.name.value} />
+              </Form.Group>
+              <Form.Group as={Col} md="4" controlId="2">
+                <Form.Label className="label-fields">Username</Form.Label>
+                <Form.Control type="text" readOnly defaultValue={this.state.username.value} />
+              </Form.Group>
+            </Form.Row>
+            <Form.Row className="align-items-left">
+              <Form.Group as={Col} md="6" controlId="3">
+                <Form.Label className="label-fields">E-mail</Form.Label>
+                <Form.Control type="text" readOnly defaultValue={this.state.email.value} />
+              </Form.Group>
+              <Form.Group as={Col} md="6" controlId="4">
+                <Form.Label className="label-fields">Birthday</Form.Label>
+                <Form.Control type="text" readOnly defaultValue={this.state.birthday.value} />
+              </Form.Group>
+            </Form.Row>
             <Form.Group as={Row} controlId="5">
               <Form.Label column sm="3">
-                <div className="label-fields no-border">Department:</div>
+                <div className="label-fields">Department:</div>
               </Form.Label>
               <Col sm="5">
-                <Form.Control
-                  className="label-fields no-border"
-                  plaintext
-                  readOnly
-                  defaultValue={this.state.departmentName} />
+                <Form.Control type="text" readOnly defaultValue={this.state.departmentName} />
               </Col>
               <Col sm="1">
                 <Tooltip placement="top" title="Change department">
@@ -345,7 +346,7 @@ class ProfileComponent extends Component {
                 <div className="label-fields no-border">Password:</div>
               </Form.Label>
               <Col sm="5">
-                <Form.Control className="label-fields" plaintext readOnly defaultValue="xxxxxxxxxxxx" />
+                <Form.Control type="text" readOnly defaultValue="xxxxxxxxx" />
               </Col>
               <Col sm="1">
                 <Tooltip placement="top" title="Change Password">
@@ -363,12 +364,12 @@ class ProfileComponent extends Component {
               </Form.Label>
               <Col sm="5">
                 <AutoComplete
-                  options={options}
-                  onChange={(event) => this.getAutoCompleteTags(event)}
-                  filterOption={(inputValue, option) =>
-                    option.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
-                  }
-                />
+                  dataSource={this.state.options}
+                  onSelect={this.onSelect}
+                  onSearch={this.getAutoCompleteTags}
+                  autoComplete="new-password" >
+                  <Form.Control className="no-border" plaintext />
+                </AutoComplete>
               </Col>
             </Form.Group>
           </Form>

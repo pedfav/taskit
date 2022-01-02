@@ -10,6 +10,7 @@
     "antd-icons": "^0.1.0-alpha.1",
     "axios": "^0.19.2",
     "bootstrap": "^4.4.1",
+    "cors": "^2.8.5",
     "formik": "^2.1.4",
     "moment": "^2.24.0",
     "react": "^16.12.0",
