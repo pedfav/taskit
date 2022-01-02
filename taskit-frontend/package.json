@@ -8,7 +8,7 @@
     "@testing-library/user-event": "^7.1.2",
     "antd": "^3.26.11",
     "antd-icons": "^0.1.0-alpha.1",
-    "axios": "^0.19.2",
+    "axios": "^0.21.2",
     "bootstrap": "^4.4.1",
     "cors": "^2.8.5",
     "formik": "^2.1.4",
